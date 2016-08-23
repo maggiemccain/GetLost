@@ -1,0 +1,25 @@
+<h2>showing your event on this page</h2>
+
+<h1><%=@event.name%></h1>
+
+<h3><%=@event.location%></h3>
+
+<h3><%=@event.state%></h3>
+
+<h4><%=@hobby.name%></h4>
+
+<img src="<%=@event.image_url%>" alt="">
+
+<p><%=@event.attendees%></p>
+
+<p><%=@event.description%></p>
+
+<%if @event.users != nil %>
+  <h4>Attendees: </h4>
+
+    <%@event.users.each do |user|%>
+
+      <h5><%=user.name%></h5>
+
+    <% end %>
+<% end %>

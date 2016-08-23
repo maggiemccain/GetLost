@@ -1,0 +1,26 @@
+<h1>create event form</h1>
+
+<%= form_tag '/events', method: 'post' do %>
+  <label for="">name</label>
+  <input type="text" name="name">
+
+  <label for="">location</label>
+  <input type="text" name="location">
+
+ <label for="">state</label>
+  <input type="text" name="state">
+
+ <label for="">image_url</label>
+  <input type="text" name="image_url">
+
+ <label for="">attendees</label>
+  <input type="text" name="attendee">
+
+ <label for="">hobby</label>
+  <input type="text" name="hobby">
+
+ <label for="">description</label>
+  <input type="text" name="description">
+
+  <button>create my event</button>
+<% end %>

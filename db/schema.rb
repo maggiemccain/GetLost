@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823001219) do
+ActiveRecord::Schema.define(version: 20160823021246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160823001219) do
     t.datetime "updated_at",  null: false
     t.integer  "creator"
     t.text     "description"
+    t.string   "date"
     t.index ["hobby_id"], name: "index_events_on_hobby_id", using: :btree
   end
 
