@@ -1,0 +1,22 @@
+<%= form_tag "/users/#{ current_user.id }", method: 'put' do %>
+
+  <label for="">name</label>
+  <input type="text" name="name" value="<%= current_user.name %>">
+
+  <label for="">gender</label>
+  <input type="text" name="gender" value="<%= current_user.gender %>">
+
+  <label for="">email</label>
+  <input type="text" name="email" value="<%= current_user.email %>">
+
+  <label for="">password</label>
+  <input type="password" name="password" value="<%= current_user.password %>" required>
+
+  <button>confirm changes</button>
+<% end %>
+
+<%= form_tag "/users/#{ current_user.id }", method: 'delete' do %>
+
+    <button>delete</button>
+    
+<% end %>

@@ -9,6 +9,16 @@
   </head>
 
   <body>
+  <% if logged_in? %>
+    <%= User.find(session[:user_id]).name %>
+
+    <a href="/users/<%= current_user.id %>/edit">edit account</a>
+
+    <%= form_tag '/session', method: 'delete' do %>
+    <button>logout</button>
+    <% end %>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>
