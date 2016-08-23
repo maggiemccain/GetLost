@@ -19,6 +19,8 @@ class EventsController < ApplicationController
     end
     # @event.creator = session[:user_id]
     @event.description = params[:description]
+    @event.creator = session[:id]
+    @event.date = params[:date]
 
     if @event.save #not handling errors yet
       redirect_to '/events'
@@ -28,12 +30,12 @@ class EventsController < ApplicationController
   end
 
   def show
-  @event = Event.find_by(id: params[:id])
-  @hobby = Hobby.find_by(id: @event.hobby_id)
-  # that call not yet working
-  # @user = User.find(@event.creator)
-  # <p>Creator : <%=@user.name%></p> will be on show.html.eb
-end
+    @event = Event.find_by(id: params[:id])
+    @hobby = Hobby.find_by(id: @event.hobby_id)
+    # that call not yet working
+    # @user = User.find(@event.creator)
+    # <p>Creator : <%=@user.name%></p> will be on show.html.eb
+  end
 
   def edit
     @event = Event.find_by(id: params[:id])
