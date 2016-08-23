@@ -11,7 +11,7 @@ class SessionController < ApplicationController
       redirect_to '/users'
     else
       # boo
-      render :new # stay at the new login form
+      redirect_to '/users/new' # stay at the new login form
     end
   end
 
