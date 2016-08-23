@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     if session[:user_id] = nil
       # redirect to sign in
     end
-    @event.creator = session[:user_id]
+    # @event.creator = session[:user_id]
     @event.description = params[:description]
 
     if @event.save #not handling errors yet

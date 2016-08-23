@@ -1,11 +1,18 @@
 <h1>Events listing page</h1>
 
 <% @events.each do |event| %>
+
   <h3><%=event.name%></h3>
 
-
-  <%= form_tag "/usersevent", method: 'post' do %>
+  <%= form_tag "/api/usersevents", method: 'post' do %>
+    <input type="hidden" value="<%=session[:id]%>" name="user_id">
+    <input type="hidden" value="<%=event.id%>" name="event_id">
     <button>Join</button>
   <% end %>
 
+<% end %>
+
+
+<%= form_tag "/events/new", method: 'get' do %>
+  <button>Create my own event</button>
 <% end %>
