@@ -4,6 +4,8 @@
 
   <h3><%=event.name%></h3>
 
+  <h3>Spaces left: <span><%= (event.attendees - event.users) %></h3>
+
   <%= form_tag "/api/usersevents", method: 'post' do %>
     <input type="hidden" value="<%=session[:id]%>" name="user_id">
     <input type="hidden" value="<%=event.id%>" name="event_id">
