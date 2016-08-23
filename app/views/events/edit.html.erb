@@ -1,0 +1,31 @@
+<h1> edit this event </h1>
+
+<h2>edit <%=@event.name%></h2>
+  <input name="name" value="<%=@event.name%>">
+  <input name="image_url" value="<%=@event.image_url%>">
+  <button name="button">update </button>
+
+</form>
+
+<%= form_tag "/events/#{@event.id}", method: 'put' do %>
+
+  <label for="">name</label>
+  <input type="text" value="<%=@event.name%>">
+
+  <label for="">location</label>
+  <input type="text" value="<%=@event.location%>">
+
+  <label for="">state</label>
+  <input type="text" value="<%=@event.state%>">
+
+  <label for="">image_url</label>
+  <input type="text" value="<%=@event.image_url%>">
+
+  <label for="">attendees</label>
+  <input type="text" value="<%=@event.attendees%>">
+
+  <label for="">description</label>
+  <input type="text" value="<%=@event.description%>">
+
+  <button>edit</button>
+<% end %>
