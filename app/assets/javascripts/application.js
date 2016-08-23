@@ -22,8 +22,29 @@
         var map;
         var markers = [];
         var eventMarkers = [];
+        var infoWindows = [];
         var getLostTo;
         var startPos;
+
+
+
+        $(document).ready(function() {
+
+
+
+        });
+
+        $.ajax({
+            type: "GET",
+            url:"api/events"
+          }).done(
+            function(response) {
+              eventMarkers = response.map(function(evt) {
+                return {name: response.name, lat: response.latitude, lng: response.longitude}
+              });
+                console.log(response);
+          });
+
 
         function initMap() {
           //default center location when geolocation is not available
@@ -45,7 +66,8 @@
           // This event listener will call addMarker() when the map is clicked.
           map.addListener('click', function(event) {
             getLostTo = event.latLng.toJSON();
-            addMarker(event.latLng);
+            //plotMarker(event.latLng);
+            plotMarker(getLostTo);
             console.log(getLostTo);
           });
 
@@ -53,12 +75,18 @@
           loadMarkers(eventMarkers);
         }
 
-        // Adds a marker to the map and push to the array.
-        function addMarker(location) {
+
+        //Let user drop a "pin"
+        function plotMarker(location) {
           clearMarkers();
-          var marker = new google.maps.Marker({
-            position: location,
-            map: map
+          closeInfoWindows(infoWindows);
+          var marker = addMarker(location);
+          marker.addListener('click', function(event) {
+            var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -25)});
+            infoWindow.setPosition(getLostTo);
+            infoWindow.setContent('<button>Click here!</button> ');
+            map.setCenter(getLostTo);
+            infoWindows.push(infoWindow);
           });
           markers.shift();
           markers.push(marker);
@@ -67,24 +95,28 @@
         //load all event markers
         function loadMarkers(locationArr) {
           locationArr.forEach(function(loc){
-            var marker = new google.maps.Marker({
-              position: loc,
-              map: map
-            });
+            var marker = addMarker(loc);
           });
         }
 
-        //--------Geoloaction-------
-
-        function flagUser(location) {
-          //Add a marker on map to notify user's current pos
+        function addMarker(location) {
+          //Add a marker on map
           var marker = new google.maps.Marker({
             position: location,
             map: map
           });
+          return marker;
         }
 
+        function closeInfoWindows(windowArr){
+          if(windowArr !== []){windowArr.forEach(function(w){w.close()});}
+        }
 
+        function addInfoWindow(){
+
+        }
+
+        //--------Geoloaction-------
         function locateUser(){
           //Retrieve users's current pos via googe map api
           var infoWindow = new google.maps.InfoWindow({map: map});
@@ -95,19 +127,18 @@
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
               };
-              infoWindow.setPosition(pos);
-              infoWindow.setContent('Location found.');
+              console.log('Location found.');
               map.setCenter(pos);
 
-              var marker = flagUser(pos);
+              var marker = addMarker(pos);
 
 
             }, function() {
-              handleLocationError(true, infoWindow, map.getCenter());
+              handleLocationError(true);
             });
           } else {
             // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
+            handleLocationError(false);
           }
         }
 
@@ -126,9 +157,8 @@
         }
 
         //Pop error message if geolocation not available
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
+        function handleLocationError(browserHasGeolocation) {
+        console.log(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         }
