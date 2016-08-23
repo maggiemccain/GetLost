@@ -1,1 +1,11 @@
 <h1>Events listing page</h1>
+
+<% @events.each do |event| %>
+  <h3><%=event.name%></h3>
+
+
+  <%= form_tag "/usersevent", method: 'post' do %>
+    <button>Join</button>
+  <% end %>
+
+<% end %>
