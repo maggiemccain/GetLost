@@ -14,6 +14,8 @@ class EventsController < ApplicationController
     @hobby = Hobby.find_by(name: params[:hobby])
     @event.hobby_id = @hobby.id
     @event.description = params[:description]
+    @event.creator = session[:id]
+    @event.date = params[:date]
 
     if @event.save #not handling errors yet
       redirect_to '/events'
@@ -23,8 +25,8 @@ class EventsController < ApplicationController
   end
 
   def show
-  @event = Event.find_by(id: params[:id])
-  @hobby = Hobby.find_by(id: @event.hobby_id)
-end
+    @event = Event.find_by(id: params[:id])
+    @hobby = Hobby.find_by(id: @event.hobby_id)
+  end
 
 end
