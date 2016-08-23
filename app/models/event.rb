@@ -3,4 +3,9 @@ class Event < ApplicationRecord
   has_one :creator
   has_many :usersevent
   has_many :users, :through => :usersevent
+
+
+  validates :name, presence:true, allow_blank: false
+  validates :location, presence:true, allow_blank: false
+  validates :date, presence:true, allow_blank: false
 end
