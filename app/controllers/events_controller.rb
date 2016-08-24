@@ -6,20 +6,20 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new
-    @event.name = params[:name]
+    @event.listing = params[:listing]
     @event.location = params[:location]
     @event.state = params[:state]
     @event.image_url = params[:image_url]
     @event.attendees = params[:attendees]
     @event.date = params[:date]
-    @hobby = Hobby.find_by(name: params[:hobby])
+    @hobby = Hobby.find_by(sport: params[:hobby])
     @event.hobby_id = @hobby.id
     if logged_in?
-      @event.creator = current_user.id
+      @event.creator = @user.id
     else
-      return false
+      render :new
     end
-      @event.description = params[:description]
+    @event.description = params[:description]
     @event.date = params[:date]
 
     if @event.save #not handling errors yet
@@ -51,7 +51,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find_by(id: params[:id])
-    @event.name = params[:name]
+    @event.listing = params[:name]
     @event.location = params[:location]
     @event.state = params[:state]
     @event.image_url = params[:image_url]
@@ -64,6 +64,5 @@ class EventsController < ApplicationController
       render :edit #remain on this page with inputted information
     end
   end
-
 
 end
