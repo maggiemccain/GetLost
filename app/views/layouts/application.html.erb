@@ -10,7 +10,7 @@
 
   <body>
   <% if logged_in? %>
-    
+
 
     <a href="/users/<%= current_user.id %>/edit"><%= User.find(session[:user_id]).name %></a>
 
@@ -20,5 +20,8 @@
   <% end %>
 
     <%= yield %>
+
+
+
   </body>
 </html>

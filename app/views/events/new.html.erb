@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -59,3 +60,49 @@
   <% end %>
 
 </div>
+
+<h1>create event form</h1>
+<%=params[:lat]%>
+<%=params[:lng]%>
+<div id="lat"><%=@new_event_latLng[:lat]%></div>
+<div id="lng"><%=@new_event_latLng[:lng]%></div>
+<%= form_tag '/events', method: 'post' do %>
+  <label for="">listing</label>
+  <input type="text" name="listing">
+
+  <label for="">location</label>
+  <input type="text" name="location">
+
+ <label for="">state</label>
+  <input type="text" name="state">
+
+ <label for="">image_url</label>
+  <input type="text" name="image_url">
+
+ <label for="">attendees</label>
+  <input type="text" name="attendee">
+
+ <label for="">date</label>
+  <input type="text" name="date">
+
+ <label for="">hobby</label>
+  <input type="text" name="hobby">
+
+ <label for="">description</label>
+  <input type="text" name="description">
+
+  <button>create my event</button>
+<% end %>
+
+<script type="text/javascript">
+
+        $(document).ready(function() {
+          $.ajax({
+              type: "GET",
+              url: "http://localhost:3000/api/events/reverse_geocoding"
+          }).done(function(response){
+            console.log(response);
+          });
+
+        });
+</script>
