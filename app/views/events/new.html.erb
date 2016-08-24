@@ -1,8 +1,8 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-  <script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
@@ -21,12 +21,19 @@
       source: availableStates
     });
   } );
-  </script>
+</script>
 
 <div class="view">
   <h1>New Event:</h1>
 
   <%= form_tag '/events', method: 'post', class: 'newForm' do %>
+  <%params[:lat]%>
+  <%params[:lng]%>
+  <div style="display:none" id="lat"><%=@new_event_latLng[:lat]%></div>
+  <div style="display:none" id="lng"><%=@new_event_latLng[:lng]%></div>
+
+  <input type="hidden" name="latitude" value="<%=@new_event_latLng[:lat]%>">
+  <input type="hidden" name="longitude" value="<%=@new_event_latLng[:lng]%>">
 
    <input type="text" name="listing" placeholder="Listing (Keep it short and sweet)" size="50">
 
@@ -57,11 +64,12 @@
     <p><textarea class="description" name="description" rows="10" cols="50" placeholder="Add a description of your event.  Be as detailed as you like!"></textarea></p>
 
     <button>Create</button>
+
   <% end %>
 
 </div>
 
-<h1>create event form</h1>
+<!-- <h1>create event form</h1>
 <%=params[:lat]%>
 <%=params[:lng]%>
 <div id="lat"><%=@new_event_latLng[:lat]%></div>
@@ -92,7 +100,7 @@
   <input type="text" name="description">
 
   <button>create my event</button>
-<% end %>
+<% end %> -->
 
 <script type="text/javascript">
 

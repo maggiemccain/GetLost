@@ -16,16 +16,18 @@ class EventsController < ApplicationController
     @event.image_url = params[:image_url]
     @event.attendees = params[:attendees]
     @event.date = params[:date]
+    @event.latitude = params[:latitude]
+    @event.longitude = params[:longitude]
     # @hobby = Hobby.find_by(sport: params[:hobby])
     @event.hobby_id = params[:hobby]
     if logged_in?
-      @event.creator = @user.id
+      @event.creator = current_user.id
     else
       render :new
     end
     @event.description = params[:description]
     @event.date = params[:date]
-
+    # binding.pry
     if @event.save #not handling errors yet
       redirect_to '/events'
     else
@@ -55,11 +57,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find_by(id: params[:id])
-    @event.listing = params[:name]
+    @event.listing = params[:listing]
     @event.location = params[:location]
     @event.state = params[:state]
     @event.image_url = params[:image_url]
     @event.attendees = params[:attendees]
+    # @event.hobby_id = params[:hobby]
     @event.date = params[:date]
     @event.description = params[:description]
     if @event.save

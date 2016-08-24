@@ -1,35 +1,35 @@
-<h2>showing your event on this page</h2>
+<div class="view">
+    <h1><%=@event.listing%></h1>
 
-<h1><%=@event.listing%></h1>
+    <h3><%=@event.location%></h3>
 
-<h3><%=@event.location%></h3>
+    <h3><%=@event.state%></h3>
 
-<h3><%=@event.state%></h3>
+    <h3>Date: <%=@event.date%></h3>
 
-<h3>Date: <%=@event.date%></h3>
+    <h4><%=@hobby.sport%></h4>
 
-<h4><%=@hobby.sport%></h4>
+    <img class="eventImg" src="<%=@event.image_url%>" alt="">
 
-<img src="<%=@event.image_url%>" alt="">
+    <p><%=@event.attendees%></p>
 
-<p><%=@event.attendees%></p>
+    <p><%=@event.description%></p>
 
-<p><%=@event.description%></p>
+    <%if @event.users != nil %>
+      <h4>Attendees: </h4>
 
-<%if @event.users != nil %>
-  <h4>Attendees: </h4>
+        <%@event.users.each do |user|%>
 
-    <%@event.users.each do |user|%>
+          <h5><%=user.name%></h5>
 
-      <h5><%=user.name%></h5>
-
+        <% end %>
     <% end %>
-<% end %>
 
-<%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
-  <button>edit</button>
-<% end %>
+    <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
+      <button>edit</button>
+    <% end %>
 
-<%= form_tag "/events/#{@event.id}", method: 'delete' do %>
-  <button>delete</button>
-<% end %>
+    <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
+      <button>delete</button>
+    <% end %>
+</div>
