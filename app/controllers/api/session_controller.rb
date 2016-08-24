@@ -1,3 +1,4 @@
+module Api
 class SessionController < ApplicationController
 
   def new
@@ -20,4 +21,5 @@ class SessionController < ApplicationController
     redirect_to '/events'
   end
 
+end
 end

@@ -13,14 +13,18 @@ class UsersController < ApplicationController
     user.gender = params[:gender]
     user.email = params[:email]
     user.password = params[:password]
-    user.save
-    redirect_to '/users'
+    user.password_confirmation = params[:password_confirmation]
+    if user.save
+      redirect_to '/events'
+    else
+      render :new
+    end
   end
 
   def edit
     @user = User.find(params[:id])
     if current_user.id != @user.id 
-      redirect_to "/users"
+      redirect_to "/events"
     end
   end
 
@@ -34,14 +38,19 @@ class UsersController < ApplicationController
     user.gender = params[:gender]
     user.email = params[:email]
     user.password = params[:password]
-    user.save
-    redirect_to '/users'
+    user.password_confirmation = params[:password_confirmation]
+
+    if user.save
+      redirect_to '/events'
+    else 
+      render :edit
+    end
   end
 
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to '/users'
+    redirect_to '/events'
   end
 
 end
