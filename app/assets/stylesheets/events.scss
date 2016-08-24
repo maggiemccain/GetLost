@@ -1,3 +1,41 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.view {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+
+  .newForm  {
+    width: 50%;
+    margin: 0 auto;
+
+    input {
+      display: block;
+      margin: 1% auto;
+      padding: 2%;
+    }
+
+    .smallInp {
+      display: inline-block;
+      margin-right: 4%;
+      width: 12%;
+    }
+
+    .description {
+      // margin: 3%;
+      padding: 2%;
+    }
+
+    select {
+      margin: 2%;
+      height: 1%;
+    }
+
+    button {
+      display: block;
+    }
+
+  }
+}

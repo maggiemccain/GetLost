@@ -12,8 +12,8 @@ class EventsController < ApplicationController
     @event.image_url = params[:image_url]
     @event.attendees = params[:attendees]
     @event.date = params[:date]
-    @hobby = Hobby.find_by(sport: params[:hobby])
-    @event.hobby_id = @hobby.id
+    # @hobby = Hobby.find_by(sport: params[:hobby])
+    @event.hobby_id = params[:hobby]
     if logged_in?
       @event.creator = @user.id
     else

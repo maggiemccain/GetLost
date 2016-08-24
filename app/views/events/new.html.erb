@@ -1,29 +1,61 @@
-<h1>create event form</h1>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+  <script>
+  $( function() {
+    var availableStates = [
+      "Victoria",
+      "New South Whales",
+      "Queensland",
+      "South Australia",
+      "Tasmania",
+      "Western Australia"
+    ];
+    $( "#state" ).autocomplete({
+      source: availableStates
+    });
+  } );
+  </script>
 
-<%= form_tag '/events', method: 'post' do %>
-  <label for="">listing</label>
-  <input type="text" name="listing">
+<div class="view">
+  <h1>New Event:</h1>
 
-  <label for="">location</label>
-  <input type="text" name="location">
+  <%= form_tag '/events', method: 'post', class: 'newForm' do %>
 
- <label for="">state</label>
-  <input type="text" name="state">
+   <input type="text" name="listing" placeholder="Listing (Keep it short and sweet)" size="50">
 
- <label for="">image_url</label>
-  <input type="text" name="image_url">
+   <select name="hobby">
+     <option value="">Pick Hobby</option>
+     <option value="1">Hiking</option>
+     <option value="2">Camping</option>
+     <option value="3">Surfing</option>
+     <option value="4">Winter Sports</option>
+     <option value="5">Extreme Sports</option>
+     <option value="6">Fishing</option>
+     <option value="7">Cycling</option>
+     <option value="8">Water Sports</option>
+     <option value="9">Off Roading</option>
+     <option value="10">Snorkling/Scuba</option>
+   </select>
 
- <label for="">attendees</label>
-  <input type="text" name="attendee">
+    <input type="text" name="location" placeholder="Location" size="50">
 
- <label for="">date</label>
-  <input type="text" name="date">
+    <input id="state" type="text" name="state" placeholder="State" size="50">
 
- <label for="">hobby</label>
-  <input type="text" name="hobby">
+    <input type="text" name="image_url" placeholder="Optional Image URL"size="50">
 
- <label for="">description</label>
-  <input type="text" name="description">
+    <input class="smallInp" type="text" name="attendee" placeholder="# of spaces">
 
-  <button>create my event</button>
-<% end %>
+    <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
+
+    <p><textarea class="description" name="description" rows="10" cols="50" placeholder="Add a description of your event.  Be as detailed as you like!"></textarea></p>
+
+    <button>Create</button>
+  <% end %>
+
+</div>

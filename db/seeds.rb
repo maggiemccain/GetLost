@@ -43,7 +43,7 @@ h8.sport = 'Off-Roading'
 h8.save
 
 h9 = Hobby.new
-h9.sport = 'Snorking/Scuba'
+h9.sport = 'Snorkling/Scuba'
 h9.save
 
 e = Event.new
