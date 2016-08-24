@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+  #  movies = Movie.create({ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+
+# Event.destroy_all
+# Hobby.destroy_all
+# rake db:seed
+h1 = Hobby.create(sport: 'swimming')
+h2 = Hobby.create(sport: 'hiking')
+
+Event.create(listing: 'get lost fun', hobby_id: h2.id)

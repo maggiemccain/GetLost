@@ -4,6 +4,10 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def new
+    @new_event_latLng = {lat: params[:lat], lng: params[:lng]}
+  end
+
   def create
     @event = Event.new
     @event.name = params[:name]

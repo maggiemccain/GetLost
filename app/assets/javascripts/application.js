@@ -80,14 +80,26 @@
           clearMarkers();
           closeInfoWindows(infoWindows);
           var marker = addMarker(location);
+
+          // infoWindow.setPosition(event.latLng);
+
+
           marker.addListener('click', function(event) {
-            var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -25)});
-            infoWindow.setPosition(event.latLng);
-            infoWindow.setContent("<button>Explore</button><button class='create'>Create Event</button>");
+            // var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -25)});
+            // infoWindow.setPosition(event.latLng);
+            // infoWindow.setContent("<button>Explore</button><button class='create'>Create Event</button>");
+            var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
+            infoWindow.setContent("<button class='expl'>Explore</button><a href='/events/new?lat=" + getLostTo.lat +
+            "&lng=" + getLostTo.lng + "'>Create</a>");
+            $('.popUpBtn').on('click', function(){
+
+              console.log(event.latLng.toJSON().lat + "button");
+              location.href = "/events/new?lat=" + event.latLng.toJSON().lat + "lng=" + event.latLng.toJSON().lng;
+
+            });
+            infoWindow.open(map, marker);
             map.setCenter(event.latLng);
             infoWindows.push(infoWindow);
-
-            $('.create').on('click',function(){console.log(event.latLng.toJSON())});
 
           });
           markers.shift();
@@ -122,7 +134,12 @@
         }
 
         function closeInfoWindows(windowArr){
-          if(windowArr !== []){windowArr.forEach(function(w){w.close()});}
+          if(windowArr !== []){
+            windowArr.forEach(function(w){
+              $('.EventInfoWindow').remove();
+              w.close();
+            });
+          }
         }
 
         function addInfoWindow(){

@@ -1,4 +1,7 @@
 <h1>create event form</h1>
+<%=params[:lat]%>
+<%=params[:lng]%>
+<%=@new_event_latLng%>
 
 <%= form_tag '/events', method: 'post' do %>
   <label for="">name</label>
