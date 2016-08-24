@@ -9,6 +9,8 @@
   </head>
 
   <body>
+  <div id="userLogin">
+    
   <% if logged_in? %>
     
 
@@ -18,6 +20,21 @@
     <button>logout</button>
     <% end %>
   <% end %>
+
+  <% if !logged_in?%>
+   <a href="/users/new">sign up</a>
+
+   <%= form_tag '/session', method: 'post' do %>
+      <label for="">email</label>
+      <input type="text" name="email">
+
+      <label for="">password</label>
+      <input type="password" name="password">
+
+    <button>login</button>
+  <% end %>
+<% end %>
+  </div>
 
     <%= yield %>
   </body>
