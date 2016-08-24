@@ -49,7 +49,7 @@ h9.save
 e = Event.new
 e.listing = 'Fishing on Yarra River'
 e.location = 'Yarra Bend Park'
-e.latitude = 37.7941
+e.latitude = -37.7941
 e.longitude = 145.0104
 e.state = 'Victoria'
 e.image_url = 'http://www.streamsongresort.com/wp-content/uploads/2014/04/header-bass-fishing.jpg'
