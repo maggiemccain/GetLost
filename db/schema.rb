@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160824001408) do
     t.integer  "hobby_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "creator"
     t.text     "description"
     t.string   "date"
     t.index ["hobby_id"], name: "index_events_on_hobby_id", using: :btree
