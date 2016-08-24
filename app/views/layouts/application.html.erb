@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Allaussieadventures</title>
+    <title>Get Lost</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -10,9 +10,9 @@
 
   <body>
   <% if logged_in? %>
-    <%= User.find(session[:user_id]).name %>
+    
 
-    <a href="/users/<%= current_user.id %>/edit">edit account</a>
+    <a href="/users/<%= current_user.id %>/edit"><%= User.find(session[:user_id]).name %></a>
 
     <%= form_tag '/session', method: 'delete' do %>
     <button>logout</button>
