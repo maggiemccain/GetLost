@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :events
   resources :hobbies
   get "api/events", to: "api/events#list_all"
+  get "api/events/reverse_geocoding", to: "api/events#get_address"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/api/usersevents', to: 'api/usersevents#create'
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
   post '/session', to: 'session#create'
   # destroying a session / logging out
   delete '/session', to: 'session#destroy'
+
 
 end
