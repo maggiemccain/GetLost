@@ -14,12 +14,12 @@ class EventsController < ApplicationController
     @event.date = params[:date]
     @hobby = Hobby.find_by(name: params[:hobby])
     @event.hobby_id = @hobby.id
-    if session[:user_id] = nil
-      # redirect to sign in
+    if logged_in?
+      @event.creator = current_user.id
+    else
+      return false
     end
-    # @event.creator = session[:user_id]
-    @event.description = params[:description]
-    @event.creator = session[:id]
+      @event.description = params[:description]
     @event.date = params[:date]
 
     if @event.save #not handling errors yet
