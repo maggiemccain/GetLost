@@ -6,6 +6,14 @@ module Api
       render json: events
     end
 
+    def get_address
+      address = Geocoder.address([-37.793643275000754,144.43313598632812])
+      render json: address
+    end
+
+    # -37.793643275000754
+    # 144.43313598632812
+
     def create
       @event = Event.new
       @event.name = params[:name]

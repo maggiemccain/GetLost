@@ -20,6 +20,7 @@
         // The markers are stored in an array.
         // The user can then click an option to hide, show or delete the markers.
         var map;
+        var geocoder;
         var markers = [];
         var eventMarkers = [];
         var infoWindows = [];
@@ -28,21 +29,19 @@
 
 
 
-        $(document).ready(function() {
 
-        });
+          $.ajax({
+              type: "GET",
+              url:"api/events"
+            }).done(
+              function(response) {
+                eventMarkers = response.map(function(evt) {
+                  return {name: evt.event_name, hobby: evt.hobby_name, latLng: {lat: evt.latitude, lng: evt.longitude}}
+                });
+                  console.log(eventMarkers);
+                  loadMarkers(eventMarkers);
+            });
 
-        $.ajax({
-            type: "GET",
-            url:"api/events"
-          }).done(
-            function(response) {
-              eventMarkers = response.map(function(evt) {
-                return {name: evt.event_name, hobby: evt.hobby_name, latLng: {lat: evt.latitude, lng: evt.longitude}}
-              });
-                console.log(eventMarkers);
-                loadMarkers(eventMarkers);
-          });
 
 
         function initMap() {
@@ -52,7 +51,7 @@
           //Store all added events, later get from ajax
           // eventMarkers.push(melb);
           // eventMarkers.push(geelong);//for testing
-
+          geocoder = new google.maps.Geocoder;
           map = new google.maps.Map($('#map')[0], {
             zoom: 10,
             center: melb,
@@ -81,22 +80,11 @@
           closeInfoWindows(infoWindows);
           var marker = addMarker(location);
 
-          // infoWindow.setPosition(event.latLng);
-
-
           marker.addListener('click', function(event) {
-            // var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -25)});
-            // infoWindow.setPosition(event.latLng);
-            // infoWindow.setContent("<button>Explore</button><button class='create'>Create Event</button>");
+
             var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
             infoWindow.setContent("<button class='expl'>Explore</button><a href='/events/new?lat=" + getLostTo.lat +
             "&lng=" + getLostTo.lng + "'>Create</a>");
-            $('.popUpBtn').on('click', function(){
-
-              console.log(event.latLng.toJSON().lat + "button");
-              location.href = "/events/new?lat=" + event.latLng.toJSON().lat + "lng=" + event.latLng.toJSON().lng;
-
-            });
             infoWindow.open(map, marker);
             map.setCenter(event.latLng);
             infoWindows.push(infoWindow);
@@ -189,3 +177,7 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         }
+
+
+
+        //-------- Geocoding ------------

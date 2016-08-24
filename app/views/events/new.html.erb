@@ -1,8 +1,8 @@
 <h1>create event form</h1>
 <%=params[:lat]%>
 <%=params[:lng]%>
-<%=@new_event_latLng%>
-
+<div id="lat"><%=@new_event_latLng[:lat]%></div>
+<div id="lng"><%=@new_event_latLng[:lng]%></div>
 <%= form_tag '/events', method: 'post' do %>
   <label for="">name</label>
   <input type="text" name="name">
@@ -33,3 +33,16 @@
 
   <button>create my event</button>
 <% end %>
+
+<script type="text/javascript">
+
+        $(document).ready(function() {
+          $.ajax({
+              type: "GET",
+              url: "http://localhost:3000/api/events/reverse_geocoding"
+          }).done(function(response){
+            console.log(response);
+          });
+
+        });
+</script>
