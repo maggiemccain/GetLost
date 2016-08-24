@@ -136,7 +136,6 @@
         function closeInfoWindows(windowArr){
           if(windowArr !== []){
             windowArr.forEach(function(w){
-              $('.EventInfoWindow').remove();
               w.close();
             });
           }
