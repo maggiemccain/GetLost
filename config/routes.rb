@@ -10,4 +10,12 @@ Rails.application.routes.draw do
   namespace :api do
     resources :usersevents
   end
+
+    # getting the login form
+  get '/login', to: 'session#new'
+  # creating a session / logging in
+  post '/session', to: 'session#create'
+  # destroying a session / logging out
+  delete '/session', to: 'session#destroy'
+
 end
