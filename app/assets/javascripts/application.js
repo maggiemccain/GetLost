@@ -30,8 +30,6 @@
 
         $(document).ready(function() {
 
-
-
         });
 
         $.ajax({
@@ -40,9 +38,10 @@
           }).done(
             function(response) {
               eventMarkers = response.map(function(evt) {
-                return {name: response.name, lat: response.latitude, lng: response.longitude}
+                return {name: evt.event_name, hobby: evt.hobby_name, latLng: {lat: evt.latitude, lng: evt.longitude}}
               });
-                console.log(response);
+                console.log(eventMarkers);
+                loadMarkers(eventMarkers);
           });
 
 
@@ -51,11 +50,11 @@
           var melb = {lat: -37.8136, lng: 144.9631};//-37.8136, 144.9631
           var geelong = {lat: -37.8136, lng: 143.9631};
           //Store all added events, later get from ajax
-          eventMarkers.push(melb);
-          eventMarkers.push(geelong);//for testing
+          // eventMarkers.push(melb);
+          // eventMarkers.push(geelong);//for testing
 
           map = new google.maps.Map($('#map')[0], {
-            zoom: 12,
+            zoom: 10,
             center: melb,
             mapTypeId: 'terrain'
           });
@@ -83,10 +82,13 @@
           var marker = addMarker(location);
           marker.addListener('click', function(event) {
             var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -25)});
-            infoWindow.setPosition(getLostTo);
-            infoWindow.setContent('<button>Click here!</button> ');
-            map.setCenter(getLostTo);
+            infoWindow.setPosition(event.latLng);
+            infoWindow.setContent("<button>Explore</button><button class='create'>Create Event</button>");
+            map.setCenter(event.latLng);
             infoWindows.push(infoWindow);
+
+            $('.create').on('click',function(){console.log(event.latLng.toJSON())});
+
           });
           markers.shift();
           markers.push(marker);
@@ -95,7 +97,18 @@
         //load all event markers
         function loadMarkers(locationArr) {
           locationArr.forEach(function(loc){
-            var marker = addMarker(loc);
+            var marker = addMarker(loc.latLng);
+            var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.name +
+            "</div><div class='hobby'>" + loc.hobby + "</div><div><a href='abc'>Bookmark This Event</a></div></div>";
+            var infoWindow = new google.maps.InfoWindow({content: popupContent, pixelOffset: new google.maps.Size(0, 10)});
+            infoWindows.push(infoWindow);
+            marker.addListener('click', function(event) {
+              // var infoWindow = new google.maps.InfoWindow({map: map, position: loc.latLng, pixelOffset: new google.maps.Size(0, -25)});
+              // infoWindow.setPosition(loc.latLng);
+              infoWindow.open(map, marker);
+              // infoWindow.setContent('<div></div><button>Click here!</button>');
+              // map.setCenter(getLostTo);
+            });
           });
         }
 
@@ -119,8 +132,6 @@
         //--------Geoloaction-------
         function locateUser(){
           //Retrieve users's current pos via googe map api
-          var infoWindow = new google.maps.InfoWindow({map: map});
-
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               var pos = {
@@ -161,16 +172,4 @@
         console.log(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
-        }
-
-
-        // Shows any markers currently in the array.
-        function showMarkers() {
-          setMapOnAll(map);
-        }
-
-        // Deletes all markers in the array by removing references to them.
-        function deleteMarkers() {
-          clearMarkers();
-          markers = [];
         }
