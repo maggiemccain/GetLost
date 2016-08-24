@@ -2,7 +2,7 @@ module Api
   class EventsController < ApplicationController
 
     def list_all
-      events = Event.joins("inner join hobbies on hobbies.id = hobby_id").select("events.id, events.name as event_name, latitude, longitude, hobbies.name as hobby_name")
+      events = Event.joins("inner join hobbies on hobbies.id = hobby_id").select("events.id, events.listing as event_name, latitude, longitude, hobbies.sport as hobby_name")
       render json: events
     end
 
