@@ -25,4 +25,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :withinRange
 
+  def joined? c_id, c_event, table
+    check = false;
+    table.each do |joint|
+      if joint.user_id == c_id.to_i && joint.event_id == c_event.to_i
+          check = true
+      end
+    end
+    check
+  end
+  helper_method :joined?
+
 end
