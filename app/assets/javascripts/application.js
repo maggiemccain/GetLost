@@ -261,9 +261,9 @@ function addMarkerWithTimeout(position, timeout, draggable, iconUrl, markerType)
          marker.setIcon('http://imgur.com/sKuevY0.png');
         getLostTo =event.latLng.toJSON();
         console.log(event.latLng.toJSON());
-        clearMarkers(eventMarkers);
-        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
-         //marker.setIcon("http://imgur.com/sKuevY0.png");
+        // clearMarkers(eventMarkers);
+        // api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
+         marker.setIcon("http://imgur.com/sKuevY0.png");
        }
 
      });
