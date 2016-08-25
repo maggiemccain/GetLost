@@ -44,7 +44,9 @@ class EventsController < ApplicationController
     else
       @event = Event.find_by(id: params[:id])
       @hobby = Hobby.find_by(id: @event.hobby_id)
+      @flagUser = joined? current_user.id, @event.id, Usersevent.all
     end
+
   end
 
   def edit

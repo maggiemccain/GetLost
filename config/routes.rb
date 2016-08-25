@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   get "api/events", to: "api/events#list_within"
 
-  get "api/events/reverse_geocoding", to: "api/events#get_address"
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "api/hobbies", to: "api/hobbies#list_hobbies"
+
+  get "/api/events/recent", to: "api/events#list_recent"
 
   post '/api/usersevents', to: 'api/usersevents#create'
 
