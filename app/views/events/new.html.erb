@@ -1,13 +1,13 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-  <script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script>
-  <script>
+</script>
+<script>
   $( function() {
     var availableStates = [
       "Victoria",
@@ -21,12 +21,35 @@
       source: availableStates
     });
   } );
-  </script>
+</script>
+
+<div id="layoutHeader">
+
+    <img id="australiaMap" src="http://www.clker.com/cliparts/a/2/a/b/11949841821800115186australia-black.svg.hi.png" alt="">
+
+      <h1 id="websiteTitle"><a id="websiteTitle" href="/events">GetLost</a></h1>
+        <p id="slogan">Do something. Somewhere. With people.</p>
+
+        <div class="slideshow">
+
+            <div><img class="hobbyImg" src="<%= Hobby.first.image_photo%>" alt=""></div>
+
+        </div>
+
+
+</div>
 
 <div class="view">
   <h1>New Event:</h1>
 
   <%= form_tag '/events', method: 'post', class: 'newForm' do %>
+  <%params[:lat]%>
+  <%params[:lng]%>
+  <div style="display:none" id="lat"><%=@new_event_latLng[:lat]%></div>
+  <div style="display:none" id="lng"><%=@new_event_latLng[:lng]%></div>
+
+  <input type="hidden" name="latitude" value="<%=@new_event_latLng[:lat]%>">
+  <input type="hidden" name="longitude" value="<%=@new_event_latLng[:lng]%>">
 
    <input type="text" name="listing" placeholder="Listing (Keep it short and sweet)" size="50">
 
@@ -44,65 +67,20 @@
      <option value="10">Snorkling/Scuba</option>
    </select>
 
-    <input type="text" name="location" placeholder="Location" size="50">
+    <input type="name" name="location" placeholder="Location" size="50">
 
     <input id="state" type="text" name="state" placeholder="State" size="50">
 
     <input type="text" name="image_url" placeholder="Optional Image URL"size="50">
 
-    <input class="smallInp" type="text" name="attendee" placeholder="# of spaces">
+    <input class="smallInp" type="text" name="attendees" placeholder="# of spaces">
 
     <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
 
     <p><textarea class="description" name="description" rows="10" cols="50" placeholder="Add a description of your event.  Be as detailed as you like!"></textarea></p>
 
     <button>Create</button>
+
   <% end %>
 
 </div>
-
-<h1>create event form</h1>
-<%=params[:lat]%>
-<%=params[:lng]%>
-<div id="lat"><%=@new_event_latLng[:lat]%></div>
-<div id="lng"><%=@new_event_latLng[:lng]%></div>
-<%= form_tag '/events', method: 'post' do %>
-  <label for="">listing</label>
-  <input type="text" name="listing">
-
-  <label for="">location</label>
-  <input type="text" name="location">
-
- <label for="">state</label>
-  <input type="text" name="state">
-
- <label for="">image_url</label>
-  <input type="text" name="image_url">
-
- <label for="">attendees</label>
-  <input type="text" name="attendee">
-
- <label for="">date</label>
-  <input type="text" name="date">
-
- <label for="">hobby</label>
-  <input type="text" name="hobby">
-
- <label for="">description</label>
-  <input type="text" name="description">
-
-  <button>create my event</button>
-<% end %>
-
-<script type="text/javascript">
-
-        $(document).ready(function() {
-          $.ajax({
-              type: "GET",
-              url: "http://localhost:3000/api/events/reverse_geocoding"
-          }).done(function(response){
-            console.log(response);
-          });
-
-        });
-</script>

@@ -1,35 +1,100 @@
-<h2>showing your event on this page</h2>
+<div id="layoutHeader">
+
+    <img id="australiaMap" src="http://www.clker.com/cliparts/a/2/a/b/11949841821800115186australia-black.svg.hi.png" alt="">
+
+      <h1 id="websiteTitle"><a id="websiteTitle" href="/events">GetLost</a></h1>
+        <p id="slogan">Do something. Somewhere. With people.</p>
+
+        <div class="slideshow">
+
+            <div><img class="hobbyImg" src="<%= @hobby.image_photo%>" alt=""></div>
+
+        </div>
+
+
+</div>
 
 <h1><%=@event.listing%></h1>
 
-<h3><%=@event.location%></h3>
+<div class="show">
 
-<h3><%=@event.state%></h3>
+  <div class="eventDetails">
+    <h3><%=@event.location%></h3>
 
-<h3>Date: <%=@event.date%></h3>
+    <h3><%=@event.state%></h3>
 
-<h4><%=@hobby.sport%></h4>
+    <h3>Date: <%=@event.date%></h3>
 
-<img src="<%=@event.image_url%>" alt="">
+    <h4>Hobby: <%=@hobby.sport%></h4>
 
-<p><%=@event.attendees%></p>
+    <!-- <img class="eventImg" src="<%=@event.image_url%>" alt=""> -->
 
-<p><%=@event.description%></p>
+    <h4>Total Spaces: <%=@event.attendees%></h4>
 
-<%if @event.users != nil %>
-  <h4>Attendees: </h4>
+    <p><%=@event.description%></p>
 
-    <%@event.users.each do |user|%>
+  </div>
 
-      <h5><%=user.name%></h5>
+  <div class="btnPanel">
+
+    <%if @event.creator == current_user.id %>
+
+      <div id="list">
+        <h3><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h3>
+
+          <div class="attendeeList">
+            <%@event.users.each do |user|%>
+              <h4><%=user.name%></h4>
+            <% end %>
+            </div>
+      <div class="btns">
+        <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
+          <button>Edit</button>
+        <% end %>
+
+        <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
+            <button>Delete</button>
+        <% end %>
+      </div>
+
+    <% else %>
+    <%if @event.users != nil %>
+      <div id="list">
+        <h3><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h3>
+
+          <div class="attendeeList">
+            <%@event.users.each do |user|%>
+              <h4><%=user.name%></h4>
+            <% end %>
+            </div>
+
+        <button class="join">Join!</button>
+      </div>
 
     <% end %>
-<% end %>
+    <%end %>
+  </div>
+</div>
 
-<%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
-  <button>edit</button>
-<% end %>
+<script>
 
-<%= form_tag "/events/#{@event.id}", method: 'delete' do %>
-  <button>delete</button>
-<% end %>
+$(document).ready(function() {
+  $('.join').on('click', function(event){
+    var $eventDiv = $(event.target).closest('#list')
+    var eventId = "<%=@event.id%>"
+    var $joinCount = $eventDiv.find('.userCount')
+    var $attendeeList = $eventDiv.find('.attendeeList')
+    $.ajax({
+      url: '/api/usersevents',
+      data: {event_id: eventId},
+      method: 'post'
+    }).done(function(response){
+      console.log(response);
+      $joinCount.html(response.join_count)
+      $attendeeList.append($('<h4>').html(response.attendee_name))
+      $('.join').html('Joined!')
+    });
+  })
+})
+
+</script>

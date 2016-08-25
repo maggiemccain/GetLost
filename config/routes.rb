@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :usersevents
   resources :events
   resources :hobbies
-  
-  get "api/events", to: "api/events#list_all"
+
+  get "api/events", to: "api/events#list_within"
+
   get "api/events/reverse_geocoding", to: "api/events#get_address"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

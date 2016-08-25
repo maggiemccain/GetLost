@@ -11,7 +11,7 @@
           <% end %>
         </div>
 
-    
+
     </div>
 
    <div id="subHeader">
@@ -47,13 +47,13 @@
           <option value="5">100km</option>
           <option value="6">200km</option>
         </select>
-        of my location        
+        of my location
         <button>get lost</button>
 
       <% end %>
-      
+
     </div>
-    
+
       <% if logged_in? %>
     <div class="userDiv">
 
@@ -66,13 +66,13 @@
           <button class="logBtn">logout</button>
           <% end %>
       </div>
-    
+
     </div>
 
       <% else %>
     <div class="userDiv">
 
-      
+
        <%= form_tag '/session', method: 'post', class: 'subBarForm' do %>
           <label for="">email</label>
           <input type="text" name="email">
@@ -85,10 +85,10 @@
        <a id="signUpTag" href="/users/new">sign up</a>
 
       <% end %>
-      
+
     </div>
     <% end %>
-    
+
   </div>
 
   <style>
@@ -123,4 +123,6 @@
 
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfxI8a5U-lL1vQiOWBIkowev5IM89MJf8&callback=initMap">
+      </script>
+      <script>
       </script>

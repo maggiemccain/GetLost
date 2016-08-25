@@ -21,6 +21,7 @@
         // The user can then click an option to hide, show or delete the markers.
         var map;
         var geocoder;
+        var currentLoc;
         var markers = [];
         var eventMarkers = [];
         var infoWindows = [];
@@ -28,34 +29,23 @@
         var startPos;
 
 
-
-
-          $.ajax({
-              type: "GET",
-              url:"api/events"
-            }).done(
-              function(response) {
-                eventMarkers = response.map(function(evt) {
-                  return {name: evt.event_name, hobby: evt.hobby_name, latLng: {lat: evt.latitude, lng: evt.longitude}}
-                });
-                  console.log(eventMarkers);
-                  loadMarkers(eventMarkers);
-            });
-
-
-
         function initMap() {
           //default center location when geolocation is not available
           var melb = {lat: -37.8136, lng: 144.9631};//-37.8136, 144.9631
           var geelong = {lat: -37.8136, lng: 143.9631};
-          //Store all added events, later get from ajax
-          // eventMarkers.push(melb);
-          // eventMarkers.push(geelong);//for testing
           geocoder = new google.maps.Geocoder;
           map = new google.maps.Map($('#map')[0], {
             zoom: 10,
             center: melb,
-            mapTypeId: 'terrain'
+            mapTypeId: 'terrain',
+            styles: [{
+                      featureType: 'poi',
+                      stylers: [{ visibility: 'off' }]  // Turn off points of interest.
+                    }, {
+                      featureType: 'transit.station',
+                      stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
+                    }],
+                  disableDoubleClickZoom: true
           });
 
           // HTML 5 geolocation
@@ -64,30 +54,87 @@
           // This event listener will call addMarker() when the map is clicked.
           map.addListener('click', function(event) {
             getLostTo = event.latLng.toJSON();
-            //plotMarker(event.latLng);
             plotMarker(getLostTo);
             console.log(getLostTo);
+            console.log(markers[0].getPosition().lat());
           });
 
-          // Adds a marker at the center of the map.
-          loadMarkers(eventMarkers);
         }
 
 
+        // setInterval(function(){
+        //   api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 20, recent: false})
+        // }, 1000);
+
+        function api_request_events(route, args) {
+          // request events from db and plot markers on map
+          var events;
+          $.ajax({
+              type: "GET",
+              url:route,
+              data: args
+            }).done(
+              function(response) {
+                events = response.map(function(evt) {
+                  return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
+                });
+                  console.log(events);
+                  loadMarkers(events);
+            });
+            return events;
+        }
+
+
+
+        //--------Geoloaction-------
+        function locateUser(){
+          //Retrieve users's current pos via googe map api
+          var pos;
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              console.log('Location found.');
+              map.setCenter(pos);
+              console.log(pos);
+              currentLoc = pos;
+              var marker = dropMarker([pos]);
+              // add event markers around user's current location
+              eventMarkers = api_request_events("/api/events", {lat: pos.lat, lng: pos.lng, radius: 20});
+            }, function() {
+              // if geolocation failed
+              eventMarkers = api_request_events("/api/events", melb);
+              handleLocationError(true);
+            });
+          } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false);
+          }
+        }
+
         //Let user drop a "pin"
         function plotMarker(location) {
-          clearMarkers();
+          clearMarkers(markers);
           closeInfoWindows(infoWindows);
-          var marker = addMarker(location);
+          var marker = dropMarker([location],"user");
 
           marker.addListener('click', function(event) {
-
             var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
-            infoWindow.setContent("<button class='expl'>Explore</button><a href='/events/new?lat=" + getLostTo.lat +
-            "&lng=" + getLostTo.lng + "'>Create</a>");
+            infoWindow.setContent("<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
+            "&lng=" + event.latLng.toJSON().lng + "'>Create</a>");
             infoWindow.open(map, marker);
             map.setCenter(event.latLng);
             infoWindows.push(infoWindow);
+            console.log($("#expBtn"));
+            var stop = false;
+            $("#expBtn").on('click', function(){
+              if(stop === false){
+                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 500});
+              }
+              stop = true;
+            });
 
           });
           markers.shift();
@@ -95,19 +142,17 @@
         }
 
         //load all event markers
-        function loadMarkers(locationArr) {
+         function loadMarkers(locationArr) {
           locationArr.forEach(function(loc){
-            var marker = addMarker(loc.latLng);
-            var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.name +
-            "</div><div class='hobby'>" + loc.hobby + "</div><div><a href='abc'>Bookmark This Event</a></div></div>";
-            var infoWindow = new google.maps.InfoWindow({content: popupContent, pixelOffset: new google.maps.Size(0, 10)});
-            infoWindows.push(infoWindow);
+            var marker = dropMarker([loc.latLng],"event", loc.icon);
             marker.addListener('click', function(event) {
-              // var infoWindow = new google.maps.InfoWindow({map: map, position: loc.latLng, pixelOffset: new google.maps.Size(0, -25)});
-              // infoWindow.setPosition(loc.latLng);
+
+              var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.listing +
+              "</div><div class='hobby'>" + loc.sport + "</div><div><a href='/events/"+ loc.id +"'>Details</a></div></div>";
+              var infoWindow = new google.maps.InfoWindow({content: popupContent, pixelOffset: new google.maps.Size(0, 10)});
               infoWindow.open(map, marker);
-              // infoWindow.setContent('<div></div><button>Click here!</button>');
-              // map.setCenter(getLostTo);
+              infoWindows.push(infoWindow);
+
             });
           });
         }
@@ -121,7 +166,36 @@
           return marker;
         }
 
+        function dropMarker(locationArr, markerType, iconUrl) {
+           var marker;
+           var draggable = false;
+           if(markerType==="user"){draggable = true}
+           for (var i = 0; i < locationArr.length; i++) {
+              marker = addMarkerWithTimeout(locationArr[i], i * 400, draggable, iconUrl);
+           }
+             return marker;
+        }
+
+        function addMarkerWithTimeout(position, timeout, draggable, iconUrl) {
+             var marker = new google.maps.Marker({
+               position: position,
+               //map: map,
+               animation: google.maps.Animation.DROP,
+               draggable: draggable
+             });
+             if(iconUrl!=="undefined"||iconUrl!==""){
+                marker.setIcon(iconUrl);
+             }
+             window.setTimeout(function() {
+               marker.setMap(map);
+             }, timeout);
+             console.log(marker);
+             return marker;
+           }
+
+
         function closeInfoWindows(windowArr){
+          infoWindows = []
           if(windowArr !== []){
             windowArr.forEach(function(w){
               w.close();
@@ -133,42 +207,17 @@
 
         }
 
-        //--------Geoloaction-------
-        function locateUser(){
-          //Retrieve users's current pos via googe map api
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-              console.log('Location found.');
-              map.setCenter(pos);
-
-              var marker = addMarker(pos);
-
-
-            }, function() {
-              handleLocationError(true);
-            });
-          } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false);
-          }
-        }
-
-
 
         // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
+        function setMapOnAll(map, toClear) {
           for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(map);
+            toClear[i].setMap(map);
           }
         }
 
         // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-          setMapOnAll(null);
+        function clearMarkers(toClear) {
+          setMapOnAll(null, toClear);
         }
 
         //Pop error message if geolocation not available
@@ -177,7 +226,3 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         }
-
-
-
-        //-------- Geocoding ------------
