@@ -1,46 +1,62 @@
-<div class="view">
-    <h1><%=@event.listing%></h1>
+<h1><%=@event.listing%></h1>
 
+<div class="show">
+
+  <div class="eventDetails">
     <h3><%=@event.location%></h3>
 
     <h3><%=@event.state%></h3>
 
     <h3>Date: <%=@event.date%></h3>
 
-    <h4><%=@hobby.sport%></h4>
+    <h4>Hobby: <%=@hobby.sport%></h4>
 
-    <img class="eventImg" src="<%=@event.image_url%>" alt="">
+    <!-- <img class="eventImg" src="<%=@event.image_url%>" alt=""> -->
 
-    <p><%=@event.attendees%></p>
+    <h4>Total Spaces: <%=@event.attendees%></h4>
 
     <p><%=@event.description%></p>
 
-    <%if @event.users != nil %>
+  </div>
+
+  <div class="btnPanel">
+
+    <%if @event.creator == current_user.id %>
+
       <div id="list">
-        <h4><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h4>
+        <h3><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h3>
+
           <div class="attendeeList">
             <%@event.users.each do |user|%>
               <h5><%=user.name%></h5>
             <% end %>
-          </div>
-        <button class="join">Join!</button>
+            </div>
 
+        <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
+          <button>Edit</button>
+        <% end %>
+
+        <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
+            <button>Delete</button>
+        <% end %>
+
+    <% else %>
+    <%if @event.users != nil %>
+      <div id="list">
+        <h3><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h3>
+
+          <div class="attendeeList">
+            <%@event.users.each do |user|%>
+              <h5><%=user.name%></h5>
+            <% end %>
+            </div>
+
+        <button class="join">Join!</button>
       </div>
 
     <% end %>
-
-  <!-- hide these buttons unless owner -->
-  <%if @event.creator == current_user.id %>
-
-    <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
-      <button>edit</button>
-    <% end %>
-
-    <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
-      <button>delete</button>
-  <% end %>
-
-  <%end %>
+    <%end %>
+  </div>
 </div>
 
 <script>
@@ -59,6 +75,7 @@ $(document).ready(function() {
       console.log(response);
       $joinCount.html(response.join_count)
       $attendeeList.append($('<h5>').html(response.attendee_name))
+      $('.join').html('Joined!')
     });
   })
 })

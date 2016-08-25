@@ -5,8 +5,8 @@
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script>
-  <script>
+</script>
+<script>
   $( function() {
     var availableStates = [
       "Victoria",
@@ -31,46 +31,38 @@
 
 </form> -->
 
-<%= form_tag "/events/#{@event.id}", class: 'newForm', method: 'put' do %>
+  <%= form_tag "/events/#{@event.id}", class: 'newForm', method: 'put' do %>
 
-  <!-- <label for="">listing</label> -->
-  <input type="text" name="listing" value="<%=@event.listing%>" size="50">
+    <input type="text" name="listing" value="<%=@event.listing%>" size="50">
 
-  <!-- <select name="hobby">
-    <option value="">Pick Hobby</option>
-    <option value="1">Hiking</option>
-    <option value="2">Camping</option>
-    <option value="3">Surfing</option>
-    <option value="4">Winter Sports</option>
-    <option value="5">Extreme Sports</option>
-    <option value="6">Fishing</option>
-    <option value="7">Cycling</option>
-    <option value="8">Water Sports</option>
-    <option value="9">Off Roading</option>
-    <option value="10">Snorkling/Scuba</option>
-  </select> -->
+    <!-- <select name="hobby">
+      <option value="">Pick Hobby</option>
+      <option value="1">Hiking</option>
+      <option value="2">Camping</option>
+      <option value="3">Surfing</option>
+      <option value="4">Winter Sports</option>
+      <option value="5">Extreme Sports</option>
+      <option value="6">Fishing</option>
+      <option value="7">Cycling</option>
+      <option value="8">Water Sports</option>
+      <option value="9">Off Roading</option>
+      <option value="10">Snorkling/Scuba</option>
+    </select> -->
 
-  <!-- <label for="">location</label> -->
-  <input type="text" name="location" value="<%=@event.location%>" size="50">
+    <input type="text" name="location" value="<%=@event.location%>" size="50">
 
-  <!-- <label for="">state</label> -->
-  <input id="state" type="text" name="state" placeholder="State" size="50">
+    <input id="state" type="text" name="state" placeholder="State" size="50">
 
+    <input type="text" name="image_url" value="<%=@event.image_url%>" size="50">
 
-  <!-- <label for="">image_url</label> -->
-  <input type="text" name="image_url" value="<%=@event.image_url%>" size="50">
+    <input class="smallInp" name="attendees" type="text" value="<%=@event.attendees%>">
 
-  <!-- <label for="">attendees</label> -->
-  <input class="smallInp" name="attendees" type="text" value="<%=@event.attendees%>">
+    <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
 
-  <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
+    <input type="text" name="description" value="<%=@event.description%>">
 
-  <!-- <label for="">description</label> -->
-  <input type="text" name="description" value="<%=@event.description%>">
-  <!-- <p><textarea class="description" name="description" rows="10" cols="50" value="<%=@event.description%>"</textarea></p> -->
+    <button>edit</button>
 
-  <button>edit</button>
-
-<% end %>
+  <% end %>
 
 </div>

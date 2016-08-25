@@ -44,3 +44,45 @@
 .eventImg {
   width: 20%;
 }
+
+.show {
+  width: 50%;
+  margin: 0 auto;
+  display:flex;
+  flex-direction: rows;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: top;
+  align-content: center;
+
+  .eventDetails {
+    vertical-align: top;
+    display: inline-block;
+    width: 50%;
+  }
+  .btnPanel {
+    vertical-align: top;
+    display: inline-block;
+    width: 50%;
+  }
+
+  form {
+    width: 60px;
+    margin: 0 auto;
+  }
+
+  button {
+    // display: inline-block;
+    margin: 5px auto;
+    background-color: #736F4E;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+    border: 1px solid #000;
+  }
+}
+
+h1, .show > * {
+  margin: 10px auto;
+  text-align: center;
+}

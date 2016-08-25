@@ -18,7 +18,6 @@ class EventsController < ApplicationController
     @event.date = params[:date]
     @event.latitude = params[:latitude]
     @event.longitude = params[:longitude]
-    # @hobby = Hobby.find_by(sport: params[:hobby])
     @event.hobby_id = params[:hobby]
     if logged_in?
       @event.creator = current_user.id
@@ -27,8 +26,7 @@ class EventsController < ApplicationController
     end
     @event.description = params[:description]
     @event.date = params[:date]
-    # binding.pry
-    if @event.save #not handling errors yet
+    if @event.save
       redirect_to '/events'
     else
       render :new
@@ -38,9 +36,6 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by(id: params[:id])
     @hobby = Hobby.find_by(id: @event.hobby_id)
-    # that call not yet working
-    # @user = User.find(@event.creator)
-    # <p>Creator : <%=@user.name%></p> will be on show.html.eb
   end
 
   def edit
@@ -66,9 +61,9 @@ class EventsController < ApplicationController
     @event.date = params[:date]
     @event.description = params[:description]
     if @event.save
-      redirect_to '/events'
+      redirect_to "/events/#{@event.id}"
     else
-      render :edit #remain on this page with inputted information
+      render :edit
     end
   end
 

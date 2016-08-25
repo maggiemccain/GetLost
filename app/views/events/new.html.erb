@@ -6,8 +6,8 @@
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script>
-  <script>
+</script>
+<script>
   $( function() {
     var availableStates = [
       "Victoria",
@@ -57,7 +57,7 @@
 
     <input type="text" name="image_url" placeholder="Optional Image URL"size="50">
 
-    <input class="smallInp" type="text" name="attendee" placeholder="# of spaces">
+    <input class="smallInp" type="text" name="attendees" placeholder="# of spaces">
 
     <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
 
@@ -68,39 +68,6 @@
   <% end %>
 
 </div>
-
-<!-- <h1>create event form</h1>
-<%=params[:lat]%>
-<%=params[:lng]%>
-<div id="lat"><%=@new_event_latLng[:lat]%></div>
-<div id="lng"><%=@new_event_latLng[:lng]%></div>
-<%= form_tag '/events', method: 'post' do %>
-  <label for="">listing</label>
-  <input type="text" name="listing">
-
-  <label for="">location</label>
-  <input type="text" name="location">
-
- <label for="">state</label>
-  <input type="text" name="state">
-
- <label for="">image_url</label>
-  <input type="text" name="image_url">
-
- <label for="">attendees</label>
-  <input type="text" name="attendee">
-
- <label for="">date</label>
-  <input type="text" name="date">
-
- <label for="">hobby</label>
-  <input type="text" name="hobby">
-
- <label for="">description</label>
-  <input type="text" name="description">
-
-  <button>create my event</button>
-<% end %> -->
 
 <script type="text/javascript">
 
