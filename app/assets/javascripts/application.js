@@ -131,7 +131,7 @@
             var stop = false;
             $("#expBtn").on('click', function(){
               if(stop === false){
-                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 30});
+                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 500});
               }
               stop = true;
             });

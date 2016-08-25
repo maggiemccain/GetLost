@@ -66,8 +66,6 @@ e.image_url = 'http://www.streamsongresort.com/wp-content/uploads/2014/04/header
 e.attendees = 5
 e.hobby_id = 6
 e.description = 'Looking for fishing enthusiasts to join me on my paddle boat to fish in the Yarra River.  We will plan to meet at Yarra Bend Park entrance bright and early at 5am to get the best fish from this brown river!'
-e.hobby_id = 26
-e.description = 'Looking for fishing enthusiasts to join me on my paddle boat to fish in the Yarra River.  Crikey!'
 e.date = '9/1/16'
 e.save
 
@@ -81,7 +79,5 @@ e1.image_url = 'https://www.google.com.au/url?sa=i&rct=j&q=&esrc=s&source=images
 e1.attendees = 3
 e1.hobby_id = 9
 e1.description = 'I love off roading in my new Jeep!  Would love company on an afternoon off roading excursion.  Maybe even a kangaroo siting!  Will send out meet up logistics a week before our adventure.'
-e1.hobby_id = 29
-e1.description = 'Looking to go off roading in my new Jeep!'
 e1.date = '10/1/16'
 e1.save
