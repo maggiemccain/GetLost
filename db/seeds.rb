@@ -95,8 +95,8 @@ e1.save
 e = Event.new
 e.listing = 'Fishing on Yarra River'
 e.location = 'Yarra Bend Park'
-e.latitude = -37.7938
-e.longitude = 145.01010
+e.latitude = -37.7038
+e.longitude = 145.31010
 e.state = 'Victoria'
 e.image_url = 'http://www.streamsongresort.com/wp-content/uploads/2014/04/header-bass-fishing.jpg'
 e.attendees = 5
@@ -108,8 +108,8 @@ e.save
 e1 = Event.new
 e1.listing = 'Off Roading Expedition'
 e1.location = 'Yarra Valley'
-e1.latitude = -37.656898
-e1.longitude = 145.4472901
+e1.latitude = -37.606898
+e1.longitude = 145.6472901
 e1.state = 'Victoria'
 e1.image_url = 'https://www.google.com.au/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwijt7TGgdnOAhUDl5QKHTmNDm0QjBwIBA&url=http%3A%2F%2Fblog.chapmanchryslerjeep.com%2Ffiles%2F2013%2F02%2FJeep.jpg&bvm=bv.130731782,d.dGo&psig=AFQjCNHlNGJ3R12UsjY0stV29fyqclRdFw&ust=1472092363034186'
 e1.attendees = 3
@@ -121,8 +121,8 @@ e1.save
 e = Event.new
 e.listing = 'Fishing on Yarra River'
 e.location = 'Yarra Bend Park'
-e.latitude = -37.7938
-e.longitude = 145.01010
+e.latitude = -37.9938
+e.longitude = 145.31010
 e.state = 'Victoria'
 e.image_url = 'http://www.streamsongresort.com/wp-content/uploads/2014/04/header-bass-fishing.jpg'
 e.attendees = 5
@@ -134,8 +134,8 @@ e.save
 e1 = Event.new
 e1.listing = 'Off Roading Expedition'
 e1.location = 'Yarra Valley'
-e1.latitude = -37.6568984
-e1.longitude = 145.4472401
+e1.latitude = -37.1568984
+e1.longitude = 145.4272401
 e1.state = 'Victoria'
 e1.image_url = 'https://www.google.com.au/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwijt7TGgdnOAhUDl5QKHTmNDm0QjBwIBA&url=http%3A%2F%2Fblog.chapmanchryslerjeep.com%2Ffiles%2F2013%2F02%2FJeep.jpg&bvm=bv.130731782,d.dGo&psig=AFQjCNHlNGJ3R12UsjY0stV29fyqclRdFw&ust=1472092363034186'
 e1.attendees = 3

@@ -42,7 +42,10 @@ $(document).ready(function(){
     // console.log(response)
     response.forEach(function(sport){
       $("#sportDrp").append("<option value="+ sport.id +">"+ sport.sport +"</option>");
+      // <option value="">Pick Hobby</option>
+
     });
+      $("#sportDrp").append("<option value=0>Any</option>");
   });
 
 
@@ -100,6 +103,7 @@ var row_check = 10000000000;
 
 setInterval(function(){
   console.log("row_check"+row_check);
+  var events;
   $.ajax({
     type: "GET",
     url: "/api/events/recent",
@@ -107,6 +111,12 @@ setInterval(function(){
   }).done(function(response){
     console.log(response);
     row_check = response.current_count
+    if(response.event_update !== null){
+      events = response.event_update.map(function(evt) {
+        return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
+      });
+      loadMarkers(events);
+    }
   });
 }, 10000);
 
@@ -167,6 +177,7 @@ function plotMarker(location) {
   var marker = dropMarker([location],"user");
 
   marker.addListener('click', function(event) {
+    closeInfoWindows(infoWindows);
     var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
     infoWindow.setContent("<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
     "&lng=" + event.latLng.toJSON().lng + "'>Create</a>");
@@ -176,10 +187,9 @@ function plotMarker(location) {
     console.log($("#expBtn"));
     var stop = false;
     $("#expBtn").on('click', function(){
-      if(stop === false){
-        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 500});
-      }
-      stop = true;
+        clearMarkers(eventMarkers);
+        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
+
     });
 
   });
@@ -217,23 +227,56 @@ function dropMarker(locationArr, markerType, iconUrl) {
    var marker;
 
    var draggable = false;
-   if(markerType==="user"){draggable = true}
+   if(markerType==="user"){
+     draggable = true;
+     iconUrl = "http://imgur.com/sKuevY0.png";//"http://imgur.com/D4op5Kp"
+   }else if(markerType === "geoloc"){
+     //icon url
+   }
    for (var i = 0; i < locationArr.length; i++) {
-      marker = addMarkerWithTimeout(locationArr[i], i * 400, draggable, iconUrl);
+      marker = addMarkerWithTimeout(locationArr[i], i * 400, draggable, iconUrl, markerType);
    }
      return marker;
 }
 
-function addMarkerWithTimeout(position, timeout, draggable, iconUrl) {
+function addMarkerWithTimeout(position, timeout, draggable, iconUrl, markerType) {
      var marker = new google.maps.Marker({
        position: position,
        //map: map,
        animation: google.maps.Animation.DROP,
        draggable: draggable
      });
+
+     if(markerType === "user"){
+       marker.setAnimation(google.maps.Animation.BOUNCE);
+     }
+
      if(iconUrl!=="undefined"||iconUrl!==""){
         marker.setIcon(iconUrl);
      }
+     marker.addListener('dragstart', toggleBounce);
+     marker.addListener('mouseup', function(event){
+       if (marker.getAnimation() === null) {
+         marker.setAnimation(google.maps.Animation.BOUNCE);
+         marker.setIcon('http://imgur.com/sKuevY0.png');
+        getLostTo =event.latLng.toJSON();
+        console.log(event.latLng.toJSON());
+        clearMarkers(eventMarkers);
+        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
+         //marker.setIcon("http://imgur.com/sKuevY0.png");
+       }
+
+     });
+     function toggleBounce() {
+         if (marker.getAnimation() !== null) {
+           marker.setAnimation(null);
+           marker.setIcon('http://imgur.com/efOfGr2.png');
+           //marker.setIcon("http://imgur.com/sKuevY0.png");
+         } //else {
+
+           //marker.setAnimation(google.maps.Animation.BOUNCE);
+         //}
+      }
      window.setTimeout(function() {
        marker.setMap(map);
      }, timeout);

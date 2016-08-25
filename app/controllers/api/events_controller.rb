@@ -7,7 +7,7 @@ module Api
 
       if params[:recent] != nil
 
-      elsif params[:sport] != nil
+      elsif params[:sport] != nil && params[:sport] != "0"
           events = Event.select("events.*, hobbies.sport, hobbies.image_url as hobby_image_url").joins(:hobby).where("hobby_id=#{params[:sport]}")
       else
           events = Event.select("events.*, hobbies.sport, hobbies.image_url as hobby_image_url").joins(:hobby)
