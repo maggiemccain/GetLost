@@ -92,7 +92,6 @@ u11.save
 
 #===========================================================
 
-
 h = Hobby.new
 h.sport = 'Hiking'
 h.image_url = 'http://imgur.com/pUiWM2g.png'
@@ -129,6 +128,29 @@ h5.image_url = 'http://imgur.com/aQIT0EM.png'
 h5.image_photo = 'https://www.daf.qld.gov.au/__data/assets/image/0007/129742/Fisherman-fishing-at-sunset-.jpg'
 h5.save
 
+h6 = Hobby.new
+h6.sport = 'Cycling'
+h6.image_url = 'http://imgur.com/Skpiurj.png'
+h6.image_photo = 'http://www.goodwp.com/images/201210/goodwp.com_25663.jpg'
+h6.save
+
+h7 = Hobby.new
+h7.sport = 'Water Sports'
+h7.image_url = 'http://imgur.com/r5O7BLq.png'
+h7.image_photo = 'https://www.makemytrip.com/travel-guide/media/dg_image/hua_hin/Water-Sport_2.jpg'
+h7.save
+
+h8 = Hobby.new
+h8.sport = 'Off-Roading'
+h8.image_url = 'http://imgur.com/Dts94OZ.png'
+h8.image_photo = 'https://i.ytimg.com/vi/YV6Co8DWvYU/maxresdefault.jpg'
+h8.save
+
+h9 = Hobby.new
+h9.sport = 'Snorkling/Scuba'
+h9.image_url = 'http://imgur.com/2R5UsAM.png'
+h9.image_photo = 'http://www.watersportspc.com/images/snorkeling_4.jpg'
+h9.save
 
 #=================================================
 
