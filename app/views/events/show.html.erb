@@ -16,14 +16,21 @@
     <p><%=@event.description%></p>
 
     <%if @event.users != nil %>
-      <h4>Attendees: </h4>
+      <div id="list">
+        <h4><span class="userCount"><%=@event.users.count%></span> Spots Filled By: </h4>
+          <div class="attendeeList">
+            <%@event.users.each do |user|%>
+              <h5><%=user.name%></h5>
+            <% end %>
+          </div>
+        <button class="join">Join!</button>
 
-        <%@event.users.each do |user|%>
+      </div>
 
-          <h5><%=user.name%></h5>
-
-        <% end %>
     <% end %>
+
+  <!-- hide these buttons unless owner -->
+  <%if @event.creator == current_user.id %>
 
     <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
       <button>edit</button>
@@ -31,5 +38,29 @@
 
     <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
       <button>delete</button>
-    <% end %>
+  <% end %>
+
+  <%end %>
 </div>
+
+<script>
+
+$(document).ready(function() {
+  $('.join').on('click', function(event){
+    var $eventDiv = $(event.target).closest('#list')
+    var eventId = "<%=@event.id%>"
+    var $joinCount = $eventDiv.find('.userCount')
+    var $attendeeList = $eventDiv.find('.attendeeList')
+    $.ajax({
+      url: '/api/usersevents',
+      data: {event_id: eventId},
+      method: 'post'
+    }).done(function(response){
+      console.log(response);
+      $joinCount.html(response.join_count)
+      $attendeeList.append($('<h5>').html(response.attendee_name))
+    });
+  })
+})
+
+</script>
