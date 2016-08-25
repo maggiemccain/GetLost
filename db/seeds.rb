@@ -93,7 +93,6 @@ u11.save
 
 #===========================================================
 
-
 h = Hobby.new
 h.sport = 'Hiking'
 h.image_url = 'http://imgur.com/pUiWM2g.png'
@@ -153,7 +152,6 @@ h9.sport = 'Snorkling/Scuba'
 h9.image_url = 'http://imgur.com/2R5UsAM.png'
 h9.image_photo = 'http://www.watersportspc.com/images/snorkeling_4.jpg'
 h9.save
-
 
 #=================================================
 
