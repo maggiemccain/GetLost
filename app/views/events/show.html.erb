@@ -11,8 +11,6 @@
 
     <h4>Hobby: <%=@hobby.sport%></h4>
 
-    <!-- <img class="eventImg" src="<%=@event.image_url%>" alt=""> -->
-
     <h4>Total Spaces: <%=@event.attendees%></h4>
 
     <p><%=@event.description%></p>
@@ -63,6 +61,9 @@
 <script>
 
 $(document).ready(function() {
+  if(<%=@flagUser%>){
+    $('.join').html('Joined!');
+  }
   $('.join').on('click', function(event){
     var $eventDiv = $(event.target).closest('#list')
     var eventId = "<%=@event.id%>"
@@ -76,9 +77,9 @@ $(document).ready(function() {
       console.log(response);
       $joinCount.html(response.join_count)
       $attendeeList.append($('<h4>').html(response.attendee_name))
-      $('.join').html('Joined!')
+      $('.join').html('Joined!');
     });
   })
-})
+});
 
 </script>

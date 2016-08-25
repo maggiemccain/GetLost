@@ -27,8 +27,8 @@
   <h1>New Event:</h1>
 
   <%= form_tag '/events', method: 'post', class: 'newForm' do %>
-  <%params[:lat]%>
-  <%params[:lng]%>
+  <%=params[:lat]%>
+  <%=params[:lng]%>
   <div style="display:none" id="lat"><%=@new_event_latLng[:lat]%></div>
   <div style="display:none" id="lng"><%=@new_event_latLng[:lng]%></div>
 

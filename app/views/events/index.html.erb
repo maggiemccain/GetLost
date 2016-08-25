@@ -19,11 +19,10 @@
     <div id="eventSearch">
 
 
-     <%= form_tag '/events', method: 'post', class: "subBarForm" do %>
 
 
       I want to go
-        <select name="hobby" class="searchDrop">
+        <select id="sportDrp" name="hobby" class="searchDrop">
           <option value="">Pick Hobby</option>
           <option value="1">Hiking</option>
           <option value="2">Camping</option>
@@ -38,7 +37,7 @@
         </select>
 
         within
-        <select name="radius" class="searchDrop">
+        <select id="radiusDrp" name="radius" class="searchDrop">
           <option value="">pick radius</option>
           <option value="1">5km</option>
           <option value="2">10km</option>
@@ -48,9 +47,8 @@
           <option value="6">200km</option>
         </select>
         of my location
-        <button>get lost</button>
+        <button id="filterBtn">get lost</button>
 
-      <% end %>
 
     </div>
 
@@ -123,6 +121,4 @@
 
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfxI8a5U-lL1vQiOWBIkowev5IM89MJf8&callback=initMap">
-      </script>
-      <script>
       </script>

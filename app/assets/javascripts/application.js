@@ -14,19 +14,41 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var map;
+var geocoder;
+var currentLoc;
+
+var markers = [];
+var eventMarkers = [];
+
+var radiusFilter;
+var sportFilter;
+
+var infoWindows = [];
+var getLostTo;
+
+var startPos;
+
+$(document).ready(function(){
+  $("#filterBtn").on("click", function(event){
+    console.log("!");
+      if(markers === []&& currentLoc !== undefined ){
+        api_request_events("/api/events", {lat: currentLoc.lat, lng: currentLoc.lng, radius: 100});
+      }else if(markers !== []){
+        console.log(markers+"!!")
+        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 100});
+      }else{
+        alert("Map not ready.");
+      }
+    });
+});
 
 
         // In the following example, markers appear when the user clicks on the map.
         // The markers are stored in an array.
         // The user can then click an option to hide, show or delete the markers.
-        var map;
-        var geocoder;
-        var currentLoc;
-        var markers = [];
-        var eventMarkers = [];
-        var infoWindows = [];
-        var getLostTo;
-        var startPos;
+
+
 
 
         function initMap() {
@@ -103,6 +125,7 @@
               var marker = dropMarker([pos]);
               // add event markers around user's current location
               eventMarkers = api_request_events("/api/events", {lat: pos.lat, lng: pos.lng, radius: 20});
+
             }, function() {
               // if geolocation failed
               eventMarkers = api_request_events("/api/events", melb);
@@ -168,6 +191,7 @@
 
         function dropMarker(locationArr, markerType, iconUrl) {
            var marker;
+
            var draggable = false;
            if(markerType==="user"){draggable = true}
            for (var i = 0; i < locationArr.length; i++) {
@@ -210,7 +234,7 @@
 
         // Sets the map on all markers in the array.
         function setMapOnAll(map, toClear) {
-          for (var i = 0; i < markers.length; i++) {
+          for (var i = 0; i < toClear.length; i++) {
             toClear[i].setMap(map);
           }
         }
