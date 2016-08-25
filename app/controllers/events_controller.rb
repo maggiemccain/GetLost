@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event.listing = params[:listing]
     @event.location = params[:location]
     @event.state = params[:state]
-    @event.image_url = params[:image_url]
+    # @event.image_url = params[:image_url]
     @event.attendees = params[:attendees]
     @event.date = params[:date]
     @event.latitude = params[:latitude]
@@ -44,11 +44,14 @@ class EventsController < ApplicationController
     else
       @event = Event.find_by(id: params[:id])
       @hobby = Hobby.find_by(id: @event.hobby_id)
+      @flagUser = joined? current_user.id, @event.id, Usersevent.all
     end
+
   end
 
   def edit
     @event = Event.find_by(id: params[:id])
+    @hobby = Hobby.find_by(id: @event.hobby_id)
   end
 
   def destroy

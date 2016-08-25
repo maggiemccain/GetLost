@@ -19,38 +19,28 @@
     <div id="eventSearch">
 
 
-     <%= form_tag '/events', method: 'post', class: "subBarForm" do %>
 
 
       I want to go
-        <select name="hobby" class="searchDrop">
+        <select id="sportDrp" name="hobby" class="searchDrop">
           <option value="">Pick Hobby</option>
-          <option value="1">Hiking</option>
-          <option value="2">Camping</option>
-          <option value="3">Surfing</option>
-          <option value="4">Winter Sports</option>
-          <option value="5">Extreme Sports</option>
-          <option value="6">Fishing</option>
-          <option value="7">Cycling</option>
-          <option value="8">Water Sports</option>
-          <option value="9">Off Roading</option>
-          <option value="10">Snorkling/Scuba</option>
         </select>
 
         within
-        <select name="radius" class="searchDrop">
-          <option value="">pick radius</option>
-          <option value="1">5km</option>
-          <option value="2">10km</option>
-          <option value="3">25km</option>
-          <option value="4">50km</option>
-          <option value="5">100km</option>
-          <option value="6">200km</option>
+        <select id="radiusDrp" name="radius" class="searchDrop">
+          <option value=>Pick Radius</option>
+          <option value=5>5km</option>
+          <option value=10>10km</option>
+          <option value=25>25km</option>
+          <option value=50>50km</option>
+          <option value=100>100km</option>
+          <option value=200>200km</option>
+          <option value=200>500km</option>
+          <option value=8000>Show Me All</option>
         </select>
         of my location
-        <button>get lost</button>
+        <button id="filterBtn">get lost</button>
 
-      <% end %>
 
     </div>
 
@@ -123,6 +113,4 @@
 
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfxI8a5U-lL1vQiOWBIkowev5IM89MJf8&callback=initMap">
-      </script>
-      <script>
       </script>

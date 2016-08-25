@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script>
@@ -20,7 +20,7 @@
     $( "#state" ).autocomplete({
       source: availableStates
     });
-  } );
+  } ); -->
 </script>
 
 <div id="layoutHeader">
@@ -43,43 +43,43 @@
   <h1>New Event:</h1>
 
   <%= form_tag '/events', method: 'post', class: 'newForm' do %>
-  <%params[:lat]%>
-  <%params[:lng]%>
-  <div style="display:none" id="lat"><%=@new_event_latLng[:lat]%></div>
-  <div style="display:none" id="lng"><%=@new_event_latLng[:lng]%></div>
+    <%params[:lat]%>
+    <%params[:lng]%>
+    <div style="display:none" id="lat"><%=@new_event_latLng[:lat]%></div>
+    <div style="display:none" id="lng"><%=@new_event_latLng[:lng]%></div>
 
-  <input type="hidden" name="latitude" value="<%=@new_event_latLng[:lat]%>">
-  <input type="hidden" name="longitude" value="<%=@new_event_latLng[:lng]%>">
+    <input type="hidden" name="latitude" value="<%=@new_event_latLng[:lat]%>">
+    <input type="hidden" name="longitude" value="<%=@new_event_latLng[:lng]%>">
 
-   <input type="text" name="listing" placeholder="Listing (Keep it short and sweet)" size="50">
+     <input type="text" name="listing" placeholder="Listing (Keep it short and sweet)" size="50">
 
-   <select name="hobby">
-     <option value="">Pick Hobby</option>
-     <option value="1">Hiking</option>
-     <option value="2">Camping</option>
-     <option value="3">Surfing</option>
-     <option value="4">Winter Sports</option>
-     <option value="5">Extreme Sports</option>
-     <option value="6">Fishing</option>
-     <option value="7">Cycling</option>
-     <option value="8">Water Sports</option>
-     <option value="9">Off Roading</option>
-     <option value="10">Snorkling/Scuba</option>
-   </select>
+     <select name="hobby">
+       <option value="">Pick Hobby</option>
+       <option value="1">Hiking</option>
+       <option value="2">Camping</option>
+       <option value="3">Surfing</option>
+       <option value="4">Winter Sports</option>
+       <option value="5">Extreme Sports</option>
+       <option value="6">Fishing</option>
+       <option value="7">Cycling</option>
+       <option value="8">Water Sports</option>
+       <option value="9">Off Roading</option>
+       <option value="10">Snorkling/Scuba</option>
+     </select>
 
     <input type="name" name="location" placeholder="Location" size="50">
 
-    <input id="state" type="text" name="state" placeholder="State" size="50">
+    <input type="text" name="state" placeholder="State" size="50">
 
-    <input type="text" name="image_url" placeholder="Optional Image URL"size="50">
+    <!-- <input type="text" name="image_url" placeholder="Optional Image URL"size="50"> -->
 
     <input class="smallInp" type="text" name="attendees" placeholder="# of spaces">
 
-    <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
+    <input class="smallInp" type="date" name="date" placeholder="Date">
 
-    <p><textarea class="description" name="description" rows="10" cols="50" placeholder="Add a description of your event.  Be as detailed as you like!"></textarea></p>
+    <p><textarea class="description" name="description" rows="5" cols="50" placeholder="Add a description of your event.  Be as detailed as you like!"></textarea></p>
 
-    <button>Create</button>
+    <button class="btn">Create</button>
 
   <% end %>
 

@@ -10,8 +10,6 @@
             <div><img class="hobbyImg" src="<%= @hobby.image_photo%>" alt=""></div>
 
         </div>
-
-
 </div>
 
 <h1 class="eventShowListing"><%=@event.listing%></h1>
@@ -26,8 +24,6 @@
     <h3>Date: <%=@event.date%></h3>
 
     <h4>Hobby: <%=@hobby.sport%></h4>
-
-    <!-- <img class="eventImg" src="<%=@event.image_url%>" alt=""> -->
 
     <h4>Total Spaces: <%=@event.attendees%></h4>
 
@@ -49,11 +45,11 @@
             </div>
       <div class="btns">
         <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
-          <button>Edit</button>
+          <button class="btn">Edit</button>
         <% end %>
 
         <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
-            <button>Delete</button>
+            <button class="btn">Delete</button>
         <% end %>
       </div>
 
@@ -68,7 +64,7 @@
             <% end %>
             </div>
 
-        <button class="join">Join!</button>
+        <button class="join btn">Join!</button>
       </div>
 
     <% end %>
@@ -79,6 +75,9 @@
 <script>
 
 $(document).ready(function() {
+  if(<%=@flagUser%>){
+    $('.join').html('Joined!');
+  }
   $('.join').on('click', function(event){
     var $eventDiv = $(event.target).closest('#list')
     var eventId = "<%=@event.id%>"
@@ -92,9 +91,9 @@ $(document).ready(function() {
       console.log(response);
       $joinCount.html(response.join_count)
       $attendeeList.append($('<h4>').html(response.attendee_name))
-      $('.join').html('Joined!')
+      $('.join').html('Joined!');
     });
   })
-})
+});
 
 </script>

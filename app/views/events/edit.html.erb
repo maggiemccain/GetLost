@@ -22,14 +22,23 @@
   } );
 </script>
 
-<h1>edit <%=@event.listing%></h1>
+<div id="layoutHeader">
+
+    <img id="australiaMap" src="http://www.clker.com/cliparts/a/2/a/b/11949841821800115186australia-black.svg.hi.png" alt="">
+
+      <h1 id="websiteTitle"><a id="websiteTitle" href="/events">GetLost</a></h1>
+        <p id="slogan">Do something. Somewhere. With people.</p>
+
+        <div class="slideshow">
+
+            <div><img class="hobbyImg" src="<%= @hobby.image_photo%>" alt=""></div>
+
+        </div>
+</div>
+
+<h1>Edit This Event:</h1>
 
 <div class="view">
-  <!-- <input name="listing" value="<%=@event.listing%>">
-  <input name="image_url" value="<%=@event.image_url%>">
-  <button name="button">update </button>
-
-</form> -->
 
   <%= form_tag "/events/#{@event.id}", class: 'newForm', method: 'put' do %>
 
@@ -51,17 +60,19 @@
 
     <input type="text" name="location" value="<%=@event.location%>" size="50">
 
-    <input id="state" type="text" name="state" placeholder="State" size="50">
+    <input id="state" type="text" name="state" value="<%=@event.state%>" size="50">
 
-    <input type="text" name="image_url" value="<%=@event.image_url%>" size="50">
+    <!-- <input type="text" name="image_url" value="<%=@event.image_url%>" size="50"> -->
 
     <input class="smallInp" name="attendees" type="text" value="<%=@event.attendees%>">
 
     <input class="smallInp" type="text" id="datepicker" name="date" placeholder="Date">
 
-    <input type="text" name="description" value="<%=@event.description%>">
+    <input type="text" name="description" value="<%=@event.description%>" <textarea name="textarea" style="width:500px;height:50px;"></textarea>
 
-    <button>edit</button>
+    <!-- <p><textarea class="description" name="description" rows="5" cols="50" value="<%=@event.description%>"></textarea></p> -->
+
+    <button class="btn">Edit</button>
 
   <% end %>
 
