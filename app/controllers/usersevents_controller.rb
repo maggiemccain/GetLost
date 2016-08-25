@@ -8,6 +8,7 @@ class UserseventsController < ApplicationController
     @join.event_id = params[:event_id]
     # if event.users doesn't include user_id
     # event.users.find {|user| user.id == current_user.id}
+    
       @join.save
       redirect_to '/events'
     # else
