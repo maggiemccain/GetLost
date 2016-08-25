@@ -5,8 +5,12 @@ class EventsController < ApplicationController
   end
 
   def new
-    @new_event_latLng = {lat: params[:lat], lng: params[:lng]}
-    @address = Geocoder.address([params[:lat].to_f,params[:lng].to_f])
+    if !logged_in?
+      redirect_to '/events'
+    else
+      @new_event_latLng = {lat: params[:lat], lng: params[:lng]}
+      @address = Geocoder.address([params[:lat].to_f,params[:lng].to_f])
+    end
   end
 
   def create
@@ -20,11 +24,11 @@ class EventsController < ApplicationController
     @event.latitude = params[:latitude]
     @event.longitude = params[:longitude]
     @event.hobby_id = params[:hobby]
-    if logged_in?
-      @event.creator = current_user.id
-    else
-      render :new
-    end
+    # if logged_in?
+    @event.creator = current_user.id
+    # else
+      # render :new
+    # end
     @event.description = params[:description]
     @event.date = params[:date]
     if @event.save
