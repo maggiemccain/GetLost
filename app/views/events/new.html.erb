@@ -64,6 +64,7 @@
 <h1>create event form</h1>
 <%=params[:lat]%>
 <%=params[:lng]%>
+<%=@address%>
 <div id="lat"><%=@new_event_latLng[:lat]%></div>
 <div id="lng"><%=@new_event_latLng[:lng]%></div>
 <%= form_tag '/events', method: 'post' do %>

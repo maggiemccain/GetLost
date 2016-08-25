@@ -16,4 +16,13 @@ class ApplicationController < ActionController::Base
     redirect_to login_path unless logged_in?
   end
 
+  def calDistance p1, p2
+    Geocoder::Calculations.distance_between(p1, p2, :units => :km)
+  end
+  helper_method :calDistance
+
+  def withinRange? p1, p2
+  end
+  helper_method :withinRange
+
 end

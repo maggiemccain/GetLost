@@ -1,0 +1,36 @@
+allaussieadventures_development=#  id          | integer                     | not null default nextval('events_id_seq'::regclass)
+allaussieadventures_development-#  listing     | character varying           |
+allaussieadventures_development-#  location    | character varying           |
+allaussieadventures_development-#  state       | character varying           |
+allaussieadventures_development-#  latitude    | double precision            |
+allaussieadventures_development-#  longitude   | double precision            |
+allaussieadventures_development-#  image_url   | text                        |
+allaussieadventures_development-#  attendees   | character varying           |
+allaussieadventures_development-#  hobby_id    | integer                     |
+allaussieadventures_development-#  created_at  | timestamp without time zone | not null
+allaussieadventures_development-#  updated_at  | timestamp without time zone | not null
+allaussieadventures_development-#  description | text                        |
+allaussieadventures_development-#  date        | character varying           |
+allaussieadventures_development-#  creator     | integer                     |
+
+4,lost1,,,-37.793643275000754,144.43313598632812,,5,1,,,,,,
+lost2,,,-37.790643275000754,144.43310598632812,,6,2,,,,,,
+lost3,,,-37.793603275000754,144.43013598632812,,10,3,,,,,,
+lost4,,,-37.893643275000754,144.44313598632812,,4,2,,,,,,
+lost5,,,-37.894643275000754,144.42313598632812,,4,2,,,,,,
+lost6,,,-37.890643275000754,144.42303598632812,,4,1,,,,,,
+lost7,,,-37.895643275000754,144.40303598632812,,4,1,,,,,,
+
+
+lost10,,,-37.093643275000754,144.03313598632812,,5,1,,,,,,
+lost11,,,-37.090643275000754,144.03413598632812,,5,2,,,,,,
+lost12,,,-37.093043275000754,144.03314598632812,,6,3,,,,,,
+lost13,,,-37.093643275000754,144.03313598632812,,5,2,,,,,,
+lost14,,,-37.093243275000754,144.03613598632812,,5,3,,,,,,
+lost15,,,-37.093143275000754,144.03313508632812,,5,3,,,,,,
+
+
+COPY events
+FROM '/Users/DevRay/GA_WDI8_CodeDependent/Project3-GetLost/GetLost/testbeans.csv' DELIMITER ',' CSV;
+
+qtqvh huamp ivkxf vnppd

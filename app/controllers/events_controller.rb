@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   def new
     @new_event_latLng = {lat: params[:lat], lng: params[:lng]}
+    @address = Geocoder.address([params[:lat].to_f,params[:lng].to_f])
   end
 
   def create

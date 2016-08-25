@@ -1,16 +1,26 @@
 module Api
   class EventsController < ApplicationController
 
-    def list_all
-      events = Event.joins("inner join hobbies on hobbies.id = hobby_id").select("events.id, events.listing as event_name, latitude, longitude, hobbies.sport as hobby_name")
-      render json: events
+    def list_within
+
+      userLoc = [params[:lat].to_f, params[:lng].to_f]
+
+      if params[:recent] != nil
+
+      else
+          events = Event.joins("inner join hobbies on hobbies.id = hobby_id").select("events.id, events.listing as event_name, latitude, longitude, hobbies.sport as hobby_name")
+      end
+
+      if params[:radius] != nil
+        radius = params[:radius].to_f
+      else
+        radius = 7000;
+      end
+      render json: events.select {|event| calDistance(userLoc, [event.latitude, event.longitude]) <= radius}
     end
 
-    def get_address
-      address = Geocoder.address([-37.793643275000754,144.43313598632812])
-      render json: address
-    end
 
+# Geocoder::Calculations.distance_between([34.05,-118.25], [40.72,-74], :units => :km).round
     # -37.793643275000754
     # 144.43313598632812
 
