@@ -68,16 +68,3 @@
   <% end %>
 
 </div>
-
-<script type="text/javascript">
-
-        $(document).ready(function() {
-          $.ajax({
-              type: "GET",
-              url: "http://localhost:3000/api/events/reverse_geocoding"
-          }).done(function(response){
-            console.log(response);
-          });
-
-        });
-</script>
