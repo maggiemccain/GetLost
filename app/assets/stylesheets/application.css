@@ -14,6 +14,140 @@
  *= require_self
  */
 
-#userLogin {
+#websiteTitle {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  color: #98A886;
+  display: inline-block;
+  text-shadow: 1px 1px #3B3923;
+  vertical-align: top;
+  font-family: 'Lalezar', cursive;
+  font-size: 2.2em;
+  transform: rotate(-3deg);
+  position: absolute;
+  left: 1em;
+  top: 0em;
+}
+
+#slogan {
+  display: inline;
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.subBarForm {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  color: white;
+}
+
+.userDiv {
   text-align: right;
+  padding-right: 0.5em;
+  display: flex;
+  flex: 1;
+  vertical-align: middle;
+}
+
+#eventSearch {
+  display: flex;
+  flex: 1;
+  text-align: center;
+  padding: 0.1em 0.3em 0.1em 0.3em;
+  border-right: 2px solid black;
+}
+
+#layoutHeader {
+  border: 2px solid black;
+  padding: 0;
+  height: 114px;
+  background-color: #D17A22;
+  text-align: center;
+  position: relative;
+}
+
+#subHeader {
+  height: 29px;
+  border: 1px solid black;
+  display: flex;
+  background-color: #3B3923;
+}
+
+#userName {
+  font-size: 1.5em;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+}
+
+#websiteTitleH1 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.slideshow.slick-initialized.slick-slider {
+  display: inline-block;
+  background-color: #D17A22;
+  vertical-align: top;
+}
+
+
+.searchDrop {
+  margin: 0.3em;
+}
+
+.logBtn {
+  margin: 1em;
+}
+
+.slideshow { 
+    display: inline-block;
+    text-align: right;
+    margin: 1px; 
+    width: 220px; 
+    padding: 0px; 
+    border: 1px solid black;
+    margin-left: 12em;
+}
+
+.hobbyImg {
+  display: inline-block;
+}
+
+#australiaMap {
+  height: 110px;
+  display: inline-block;
+}
+
+.slideshow img {
+  width: 220px;
+  height: 110px;
+  display: inline-block;
+  text-align: center;
+}
+
+#nameRef {
+  display: inline-block;
+}
+
+.logBtn {
+  margin: 0;
+  vertical-align: middle;
+}
+
+#logoutBtn {
+  display: inline-block;
+  margin: auto 0;
+}
+
+#signUpTag {
+  text-decoration: none;
+  color: #D17A22;
+  font-weight: bolder;
 }

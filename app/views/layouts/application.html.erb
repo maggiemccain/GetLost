@@ -6,37 +6,32 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lalezar" rel="stylesheet">
   </head>
 
   <body>
-  <div id="userLogin">
+
+
+<!--   <script>
     
-  <% if logged_in? %>
+    $("#slideshow > div:gt(0)").hide();
 
+    setInterval(function() { 
+      $('#slideshow > div:first')
+        .fadeOut(500)
+        .next()
+        .fadeIn(500)
+        .end()
+        .appendTo('#slideshow');
+    },  3000);
+    
+  </script> -->
 
-    <a href="/users/<%= current_user.id %>/edit"><%= User.find(session[:user_id]).name %></a>
-
-    <%= form_tag '/session', method: 'delete' do %>
-    <button>logout</button>
-    <% end %>
-  <% end %>
-
-  <% if !logged_in?%>
-   <a href="/users/new">sign up</a>
-
-   <%= form_tag '/session', method: 'post' do %>
-      <label for="">email</label>
-      <input type="text" name="email">
-
-      <label for="">password</label>
-      <input type="password" name="password">
-
-    <button>login</button>
-  <% end %>
-<% end %>
-  </div>
 
     <%= yield %>
+
+
 
 
 

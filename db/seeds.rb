@@ -9,42 +9,52 @@
 
 h = Hobby.new
 h.sport = 'Hiking'
+h.image_url = 'http://argyruntum.com/wp-content/uploads/2014/03/hiking.jpg'
 h.save
 
 h1 = Hobby.new
 h1.sport = 'Camping'
+h1.image_url = 'https://i.ytimg.com/vi/vfkhlLnSq7o/maxresdefault.jpg'
 h1.save
 
 h2 = Hobby.new
 h2.sport = 'Surfing'
+h2.image_url = 'https://images5.alphacoders.com/300/300757.jpg'
 h2.save
 
 h3 = Hobby.new
 h3.sport = 'Winter Sports'
+h3.image_url = 'http://snowbrains.com/wp-content/uploads/2014/01/url-2.jpeg'
 h3.save
 
 h4 = Hobby.new
 h4.sport = 'Extreme Sports'
+h4.image_url = 'https://i.ytimg.com/vi/apYEQlGlUAY/maxresdefault.jpg'
 h4.save
 
 h5 = Hobby.new
 h5.sport = 'Fishing'
+h5.image_url = 'https://www.daf.qld.gov.au/__data/assets/image/0007/129742/Fisherman-fishing-at-sunset-.jpg'
 h5.save
 
 h6 = Hobby.new
 h6.sport = 'Cycling'
+h6.image_url = 'http://www.goodwp.com/images/201210/goodwp.com_25663.jpg'
 h6.save
 
 h7 = Hobby.new
 h7.sport = 'Water Sports'
+h7.image_url = 'https://www.makemytrip.com/travel-guide/media/dg_image/hua_hin/Water-Sport_2.jpg'
 h7.save
 
 h8 = Hobby.new
 h8.sport = 'Off-Roading'
+h8.image_url = 'https://i.ytimg.com/vi/YV6Co8DWvYU/maxresdefault.jpg'
 h8.save
 
 h9 = Hobby.new
 h9.sport = 'Snorkling/Scuba'
+h9.image_url = 'http://www.watersportspc.com/images/snorkeling_4.jpg'
 h9.save
 
 e = Event.new
