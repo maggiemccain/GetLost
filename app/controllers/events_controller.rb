@@ -49,6 +49,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find_by(id: params[:id])
+    @hobby = Hobby.find_by(id: @event.hobby_id)
   end
 
   def destroy

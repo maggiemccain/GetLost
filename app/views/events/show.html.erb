@@ -10,8 +10,6 @@
             <div><img class="hobbyImg" src="<%= @hobby.image_photo%>" alt=""></div>
 
         </div>
-
-
 </div>
 
 <h1><%=@event.listing%></h1>
@@ -49,11 +47,11 @@
             </div>
       <div class="btns">
         <%= form_tag "/events/#{@event.id}/edit", method: 'get' do %>
-          <button>Edit</button>
+          <button class="btn">Edit</button>
         <% end %>
 
         <%= form_tag "/events/#{@event.id}", method: 'delete' do %>
-            <button>Delete</button>
+            <button class="btn">Delete</button>
         <% end %>
       </div>
 
@@ -68,7 +66,7 @@
             <% end %>
             </div>
 
-        <button class="join">Join!</button>
+        <button class="join btn">Join!</button>
       </div>
 
     <% end %>
