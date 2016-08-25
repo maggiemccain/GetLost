@@ -51,11 +51,11 @@ Marker.prototype.setMap = function() {
 var MarkerLabel = function(options) {
 	var self = this;
 	this.setValues(options);
-	
+
 	// Create the label container
 	this.div = document.createElement('div');
 	this.div.className = 'map-icon-label';
- 
+
 	// Trigger the marker click handler if clicking on the label
 	google.maps.event.addDomListener(this.div, 'click', function(e){
 		(e.stopPropagation) && e.stopPropagation();
@@ -77,7 +77,7 @@ MarkerLabel.prototype.onAdd = function() {
 		google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
 	];
 };
- 
+
 // Marker Label onRemove
 MarkerLabel.prototype.onRemove = function() {
 	this.div.parentNode.removeChild(this.div);
@@ -86,7 +86,7 @@ MarkerLabel.prototype.onRemove = function() {
 		google.maps.event.removeListener(this.listeners[i]);
 	}
 };
- 
+
 // Implement draw
 MarkerLabel.prototype.draw = function() {
 	var projection = this.getProjection();
@@ -100,5 +100,5 @@ MarkerLabel.prototype.draw = function() {
 	div.style.display = 'block';
 	div.style.left = (position.x - (div.offsetWidth / 2)) + 'px';
 	div.style.top = (position.y - div.offsetHeight) + 'px';
-	
+
 };

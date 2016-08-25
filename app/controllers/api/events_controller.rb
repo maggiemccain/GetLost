@@ -8,7 +8,7 @@ module Api
       if params[:recent] != nil
 
       else
-          events = Event.joins("inner join hobbies on hobbies.id = hobby_id").select("events.id, events.listing as event_name, latitude, longitude, hobbies.sport as hobby_name")
+          events = Event.select("events.*, hobbies.sport, hobbies.image_url as hobby_image_url").joins(:hobby)
       end
 
       if params[:radius] != nil

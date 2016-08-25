@@ -1,3 +1,27 @@
+http://imgur.com/859m2Lu.png camping
+http://imgur.com/aQIT0EM.png fishing
+http://imgur.com/Dts94OZ.png offroading
+http://imgur.com/cVobqou.png surfing
+http://imgur.com/r5O7BLq.png water sports
+http://imgur.com/2R5UsAM.png scuba diving
+http://imgur.com/Skpiurj.png cycling
+http://imgur.com/V9Hnt2T.png winter sprockets
+http://imgur.com/jGlZE84.png extreme sports
+http://imgur.com/pUiWM2g.png hiking
+
+1 | get lost fun!       | AUS;2C   | VIC   | -37.7990012860937 | 145.054550170898 |           |           |        1 | 2016-08-23 04:47:44.753908 | 2016-08-23 04:47:44.753908 |             |      |
+  2 | Mountain King       |          |       | -37.8657064725939 | 145.340194702148 |           |           |        2 | 2016-08-23 13:19:39.705868 | 2016-08-23 13:19:39.705868 |             |      |
+  3 | I believe I can Fly |          |       | -38.1497450208074 | 145.123901367188 |           |           |        3 | 2016-08-23 13:22:01.891828 | 2016-08-23 13:22:01.891828 |
+
+
+
+
+rails db:seed
+
+
+
+
+
 allaussieadventures_development=#  id          | integer                     | not null default nextval('events_id_seq'::regclass)
 allaussieadventures_development-#  listing     | character varying           |
 allaussieadventures_development-#  location    | character varying           |

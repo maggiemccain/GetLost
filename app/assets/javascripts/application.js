@@ -46,17 +46,7 @@
           // This event listener will call addMarker() when the map is clicked.
           map.addListener('click', function(event) {
             getLostTo = event.latLng.toJSON();
-            //plotMarker(event.latLng);
             plotMarker(getLostTo);
-            //clearTimeout(timeOutId);
-            //
-
-            // while(markers!==[]){
-            //   var timeOutId = setTimeout(api_request_events("/api/events", {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng(), radius: 10}), 3000);
-            //   clearTimeout(timeOutId);
-            // }
-
-
             console.log(getLostTo);
             console.log(markers[0].getPosition().lat());
           });
@@ -78,11 +68,10 @@
             }).done(
               function(response) {
                 events = response.map(function(evt) {
-                  return {name: evt.event_name, hobby: evt.hobby_name, latLng: {lat: evt.latitude, lng: evt.longitude}}
+                  return {listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
                 });
                   console.log(events);
                   loadMarkers(events);
-
             });
             return events;
         }
@@ -119,12 +108,11 @@
 
         //Let user drop a "pin"
         function plotMarker(location) {
-          clearMarkers();
+          clearMarkers(markers);
           closeInfoWindows(infoWindows);
           var marker = dropMarker([location],"user");
 
           marker.addListener('click', function(event) {
-
             var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
             infoWindow.setContent("<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
             "&lng=" + event.latLng.toJSON().lng + "'>Create</a>");
@@ -132,8 +120,12 @@
             map.setCenter(event.latLng);
             infoWindows.push(infoWindow);
             console.log($("#expBtn"));
+            var stop = false;
             $("#expBtn").on('click', function(){
-              api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 10})
+              if(stop === false){
+                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 100});
+              }
+              stop = true;
             });
 
           });
@@ -144,18 +136,15 @@
         //load all event markers
          function loadMarkers(locationArr) {
           locationArr.forEach(function(loc){
-            var marker = dropMarker([loc.latLng],"event");
+            var marker = dropMarker([loc.latLng],"event", loc.icon);
             marker.addListener('click', function(event) {
-              // var infoWindow = new google.maps.InfoWindow({map: map, position: loc.latLng, pixelOffset: new google.maps.Size(0, -25)});
-              // infoWindow.setPosition(loc.latLng);
 
-              var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.name +
-              "</div><div class='hobby'>" + loc.hobby + "</div><div><a href='abc'>Bookmark This Event</a></div></div>";
+              var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.listing +
+              "</div><div class='hobby'>" + loc.sport + "</div><div><a href='abc'>Bookmark This Event</a></div></div>";
               var infoWindow = new google.maps.InfoWindow({content: popupContent, pixelOffset: new google.maps.Size(0, 10)});
               infoWindow.open(map, marker);
               infoWindows.push(infoWindow);
-              // infoWindow.setContent('<div></div><button>Click here!</button>');
-              // map.setCenter(getLostTo);
+
             });
           });
         }
@@ -169,32 +158,26 @@
           return marker;
         }
 
-        function dropMarker(locationArr, markerType) {
+        function dropMarker(locationArr, markerType, iconUrl) {
            var marker;
            var draggable = false;
            if(markerType==="user"){draggable = true}
            for (var i = 0; i < locationArr.length; i++) {
-              marker = addMarkerWithTimeout(locationArr[i], i * 400, draggable);
+              marker = addMarkerWithTimeout(locationArr[i], i * 400, draggable, iconUrl);
            }
              return marker;
         }
 
-        function addMarkerWithTimeout(position, timeout, draggable) {
+        function addMarkerWithTimeout(position, timeout, draggable, iconUrl) {
              var marker = new google.maps.Marker({
                position: position,
                //map: map,
                animation: google.maps.Animation.DROP,
-               icon: {
-          			path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-          			fillColor: '#0FFFFF',
-                height: 20,
-                width: 10,
-          			fillOpacity: 1,
-          			strokeColor: '',
-          			strokeWeight: 0
-          		},
                draggable: draggable
              });
+             if(iconUrl!=="undefined"||iconUrl!==""){
+                marker.setIcon(iconUrl);
+             }
              window.setTimeout(function() {
                marker.setMap(map);
              }, timeout);
@@ -218,15 +201,15 @@
 
 
         // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
+        function setMapOnAll(map, toClear) {
           for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(map);
+            toClear[i].setMap(map);
           }
         }
 
         // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-          setMapOnAll(null);
+        function clearMarkers(toClear) {
+          setMapOnAll(null, toClear);
         }
 
         //Pop error message if geolocation not available
@@ -235,7 +218,3 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         }
-
-
-
-        //-------- Geocoding ------------
