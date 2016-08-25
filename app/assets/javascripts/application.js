@@ -37,7 +37,15 @@
           map = new google.maps.Map($('#map')[0], {
             zoom: 10,
             center: melb,
-            mapTypeId: 'terrain'
+            mapTypeId: 'terrain',
+            styles: [{
+                      featureType: 'poi',
+                      stylers: [{ visibility: 'off' }]  // Turn off points of interest.
+                    }, {
+                      featureType: 'transit.station',
+                      stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
+                    }],
+                  disableDoubleClickZoom: true
           });
 
           // HTML 5 geolocation
@@ -68,7 +76,7 @@
             }).done(
               function(response) {
                 events = response.map(function(evt) {
-                  return {listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
+                  return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
                 });
                   console.log(events);
                   loadMarkers(events);
@@ -123,7 +131,7 @@
             var stop = false;
             $("#expBtn").on('click', function(){
               if(stop === false){
-                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 100});
+                api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 30});
               }
               stop = true;
             });
@@ -140,7 +148,7 @@
             marker.addListener('click', function(event) {
 
               var popupContent = "<div class='EventInfoWindow'><div class='e_name'>" + loc.listing +
-              "</div><div class='hobby'>" + loc.sport + "</div><div><a href='abc'>Bookmark This Event</a></div></div>";
+              "</div><div class='hobby'>" + loc.sport + "</div><div><a href='/events/"+ loc.id +"'>Details</a></div></div>";
               var infoWindow = new google.maps.InfoWindow({content: popupContent, pixelOffset: new google.maps.Size(0, 10)});
               infoWindow.open(map, marker);
               infoWindows.push(infoWindow);

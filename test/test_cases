@@ -18,7 +18,7 @@ http://imgur.com/pUiWM2g.png hiking
 
 rails db:seed
 
-
+select e.*, h.id, h.sport, h.image_url from 
 
 
 
