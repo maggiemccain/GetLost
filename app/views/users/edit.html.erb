@@ -1,28 +1,69 @@
-<%= form_tag "/users/#{ current_user.id }", method: 'put' do %>
+<div id="layoutHeader">
 
-  <label for="">name</label>
-  <input type="text" name="name" value="<%= current_user.name %>" required>
+    <img id="australiaMap" src="http://www.clker.com/cliparts/a/2/a/b/11949841821800115186australia-black.svg.hi.png" alt="">
 
-  <select name="gender" id="">
-    <option value=""><%= current_user.gender %></option>
-    <option value="male">male</option>
-    <option value="female">female</option>
-  </select>
+      <h1 id="websiteTitle"><a id="websiteTitle" href="/events">GetLost</a></h1>
+        <p id="slogan">Do something. Somewhere. With people.</p>
 
-  <label for="">email</label>
-  <input type="text" name="email" value="<%= current_user.email %>" required>
+        <div class="slideshow">
 
-  <label for="">password</label>
-  <input type="password" name="password" value="<%= current_user.password %>" required>
+            <div><img class="hobbyImg" src="<%= Hobby.last.image_photo%>" alt=""></div>
 
-  <label for="">confirm password</label>
-  <input type="password" name="password_confirmation" required>
+        </div>
 
-  <button>confirm changes</button>
-<% end %>
 
-<%= form_tag "/users/#{ current_user.id }", method: 'delete' do %>
+</div>
 
-    <button>delete</button>
+
+<div>
+  
+  <div class="userEditForm">
     
+    <%= form_tag "/users/#{ current_user.id }", method: 'put' do %>
+
+      <label for="">name</label>
+      <input type="text" name="name" value="<%= current_user.name %>" required>
+
+      <select name="gender" id="">
+        <option value=""><%= current_user.gender %></option>
+        <option value="male">male</option>
+        <option value="female">female</option>
+      </select>
+
+      <label for="">email</label>
+      <input type="text" name="email" value="<%= current_user.email %>" required>
+
+      <label for="">password</label>
+      <input type="password" name="password" value="<%= current_user.password %>" required>
+
+      <label for="">confirm password</label>
+      <input type="password" name="password_confirmation" required>
+
+      <button class="btn">confirm changes</button>
+    <% end %>
+
+    <%= form_tag "/users/#{ current_user.id }", method: 'delete' do %>
+
+        <button class="deleteBtn">delete profile</button>
+        
+    <% end %>
+    
+  </div>
+  
+</div>
+
+<div class="myEventListings">
+  <h2 id="eventAttendingHeader">Events I'm currently attending:</h2>
+<% current_user.events.each do |event| %>
+<div class="userEventsList">
+    <p><%= event.listing %> at <%= event.location %>, <%= event.state %> on the <%= event.date %>. <a class="listingsLinks" href="/events/<%= event.id %>">more details</a></p>
+</div>
 <% end %>
+
+</div>
+
+
+
+
+
+

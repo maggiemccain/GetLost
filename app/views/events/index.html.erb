@@ -59,7 +59,7 @@
 
 
       <div class="subBarForm">
-        <a id="userName" href="/users/<%= current_user.id %>/edit">G'Day, <%= User.find(session[:user_id]).name %></a>
+        <a id="userName" href="/users/<%= current_user.id %>/edit">G'Day, <%= User.find(session[:user_id]).name.capitalize %></a>
       </div>
       <div id="logoutBtn">
           <%= form_tag '/session', method: 'delete' , class: 'subBarForm' do %>
