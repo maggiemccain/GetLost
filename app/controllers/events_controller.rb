@@ -39,8 +39,12 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by(id: params[:id])
-    @hobby = Hobby.find_by(id: @event.hobby_id)
+    if !logged_in?
+      redirect_to '/users/new'
+    else
+      @event = Event.find_by(id: params[:id])
+      @hobby = Hobby.find_by(id: @event.hobby_id)
+    end
   end
 
   def edit
