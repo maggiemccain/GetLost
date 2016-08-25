@@ -3,8 +3,11 @@
   <label for="">name</label>
   <input type="text" name="name" value="<%= current_user.name %>" required>
 
-  <label for="">gender</label>
-  <input type="text" name="gender" value="<%= current_user.gender %>" required>
+  <select name="gender" id="">
+    <option value=""><%= current_user.gender %></option>
+    <option value="male">male</option>
+    <option value="female">female</option>
+  </select>
 
   <label for="">email</label>
   <input type="text" name="email" value="<%= current_user.email %>" required>

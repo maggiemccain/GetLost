@@ -1,4 +1,96 @@
-<h1>Events listing page</h1>
+    <div id="layoutHeader">
+
+    <img id="australiaMap" src="http://www.clker.com/cliparts/a/2/a/b/11949841821800115186australia-black.svg.hi.png" alt="">
+
+      <h1 id="websiteTitle"><a id="websiteTitle" href="/events">GetLost</a></h1>
+        <p id="slogan">Do something. Somewhere. With people.</p>
+
+        <div class="slideshow">
+          <% Hobby.all.each do |hobby| %>
+            <div><img class="hobbyImg" src="<%= hobby.image_photo %>" alt=""></div>
+          <% end %>
+        </div>
+
+
+    </div>
+
+   <div id="subHeader">
+
+    <div id="eventSearch">
+
+
+     <%= form_tag '/events', method: 'post', class: "subBarForm" do %>
+
+
+      I want to go
+        <select name="hobby" class="searchDrop">
+          <option value="">Pick Hobby</option>
+          <option value="1">Hiking</option>
+          <option value="2">Camping</option>
+          <option value="3">Surfing</option>
+          <option value="4">Winter Sports</option>
+          <option value="5">Extreme Sports</option>
+          <option value="6">Fishing</option>
+          <option value="7">Cycling</option>
+          <option value="8">Water Sports</option>
+          <option value="9">Off Roading</option>
+          <option value="10">Snorkling/Scuba</option>
+        </select>
+
+        within
+        <select name="radius" class="searchDrop">
+          <option value="">pick radius</option>
+          <option value="1">5km</option>
+          <option value="2">10km</option>
+          <option value="3">25km</option>
+          <option value="4">50km</option>
+          <option value="5">100km</option>
+          <option value="6">200km</option>
+        </select>
+        of my location
+        <button>get lost</button>
+
+      <% end %>
+
+    </div>
+
+      <% if logged_in? %>
+    <div class="userDiv">
+
+
+      <div class="subBarForm">
+        <a id="userName" href="/users/<%= current_user.id %>/edit">G'Day, <%= User.find(session[:user_id]).name %></a>
+      </div>
+      <div id="logoutBtn">
+          <%= form_tag '/session', method: 'delete' , class: 'subBarForm' do %>
+          <button class="logBtn">logout</button>
+          <% end %>
+      </div>
+
+    </div>
+
+      <% else %>
+    <div class="userDiv">
+
+
+       <%= form_tag '/session', method: 'post', class: 'subBarForm' do %>
+          <label for="">email</label>
+          <input type="text" name="email">
+
+          <label for="">password</label>
+          <input type="password" name="password">
+
+        <button class="logBtn">login</button>
+
+       <a id="signUpTag" href="/users/new">sign up</a>
+
+      <% end %>
+
+    </div>
+    <% end %>
+
+  </div>
+
   <style>
         html, body {
           height: 100%;
@@ -22,10 +114,12 @@
           padding-left: 10px;
         }
       </style>
+
       <div id="map"></div>
       <p>Click on the map to add markers.</p>
 
 
+      <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfxI8a5U-lL1vQiOWBIkowev5IM89MJf8&callback=initMap">
