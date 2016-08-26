@@ -186,7 +186,7 @@ function locateUser(){
       currentLoc = pos;
       var marker = dropMarker([pos]);
       // add event markers around user's current location
-      eventsObj.push(api_request_events("/api/events", {lat: pos.lat, lng: pos.lng, radius: 100}));
+      eventsObj.push(api_request_events("/api/events", {lat: pos.lat, lng: pos.lng, radius: 25}));
 
     }, function() {
       // if geolocation failed
