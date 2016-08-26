@@ -225,3 +225,15 @@ e5.hobby_id = 3
 e5.description = 'Looking for fellow seasoned wind surfers for one final outing in St Kilda before it gets cold this winter.  Should be narly mate!'
 e5.date = '2016-09-10'
 e5.save
+
+e6 = Event.new
+e6.listing = 'Skydiving!'
+e6.location = 'Sky Dive Melbourne'
+e6.latitude = -37.8765638
+e6.longitude = 144.8128741
+e6.state = 'Victoria'
+e6.attendees = 3
+e6.hobby_id = 5
+e6.description = 'If you are an adrenaline junkie who loves to free fall, you should come along for a tandem group dive!'
+e6.date = '2016-09-10'
+e6.save
