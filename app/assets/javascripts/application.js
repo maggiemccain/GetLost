@@ -84,7 +84,35 @@ function initMap() {
             }, {
               featureType: 'transit.station',
               stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
-            }],
+            },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" },
+      { "color": "#6F4CFF" }
+    ]
+  },{
+    "featureType": "road.highway",
+    "stylers": [
+      { "visibility": "off" },
+      { "color": "#554E71" },
+      { "weight": 0.1 }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "color": "#7FB27F" },
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#5b2f23" },
+      { "weight": 1.6 }
+    ]
+  }],
           disableDoubleClickZoom: true
   });
 
@@ -118,7 +146,7 @@ setInterval(function(){
       loadMarkers(events);
     }
   });
-}, 10000);
+}, 3000);
 
 function api_request_events(route, args) {
   // request events from db and plot markers on map
@@ -178,19 +206,25 @@ function plotMarker(location) {
 
   marker.addListener('click', function(event) {
     closeInfoWindows(infoWindows);
-    var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
-    infoWindow.setContent("<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
-    "&lng=" + event.latLng.toJSON().lng + "'>Create</a>");
+    windowDom = "<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
+    "&lng=" + event.latLng.toJSON().lng + "'>Create</a>"
+    var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -10),
+    });
+
+    infoWindow.setContent(windowDom);
+
+    var updateLoc = event.latLng.toJSON();
     infoWindow.open(map, marker);
-    map.setCenter(event.latLng);
-    infoWindows.push(infoWindow);
-    console.log($("#expBtn"));
-    var stop = false;
-    $("#expBtn").on('click', function(){
+    $("#map").on('click', '#expBtn', function(){
+        console.log('button clicked')
         clearMarkers(eventMarkers);
         api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
 
     });
+
+    map.setCenter(event.latLng);
+    infoWindows.push(infoWindow);
+
 
   });
   markers.shift();
@@ -256,13 +290,14 @@ function addMarkerWithTimeout(position, timeout, draggable, iconUrl, markerType)
      }
      marker.addListener('dragstart', toggleBounce);
      marker.addListener('mouseup', function(event){
-       if (marker.getAnimation() === null) {
+       if (marker.getAnimation() === null && markerType === "user") {
          marker.setAnimation(google.maps.Animation.BOUNCE);
          marker.setIcon('http://imgur.com/sKuevY0.png');
         getLostTo =event.latLng.toJSON();
         console.log(event.latLng.toJSON());
         // clearMarkers(eventMarkers);
         // api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
+
          marker.setIcon("http://imgur.com/sKuevY0.png");
        }
 
