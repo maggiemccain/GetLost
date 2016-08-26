@@ -6,11 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 u = User.new
 u.name = "Sam"
 u.gender = "male"
 u.email = "sam@ga.co"
 u.password = "pudding"
+u.password_confirmation = "pudding"
 u.save
 
 u1 = User.new
@@ -18,6 +20,7 @@ u1.name = "Maggie"
 u1.gender = "female"
 u1.email = "maggia@ga.co"
 u1.password = "pudding"
+u1.password_confirmation = "pudding"
 u1.save
 
 u2 = User.new
@@ -25,6 +28,7 @@ u2.name = "Ray"
 u2.gender = "male"
 u2.email = "ray@ga.co"
 u2.password = "pudding"
+u2.password_confirmation = "pudding"
 u2.save
 
 u3 = User.new
@@ -32,6 +36,7 @@ u3.name = "Jordan"
 u3.gender = "male"
 u3.email = "jordan@ga.co"
 u3.password = "pudding"
+u3.password_confirmation = "pudding"
 u3.save
 
 u4 = User.new
@@ -39,6 +44,7 @@ u4.name = "Tad"
 u4.gender = "male"
 u4.email = "tad@ga.co"
 u4.password = "pudding"
+u4.password_confirmation = "pudding"
 u4.save
 
 u5 = User.new
@@ -46,6 +52,7 @@ u5.name = "Andrew"
 u5.gender = "male"
 u5.email = "andrew@ga.co"
 u5.password = "pudding"
+u5.password_confirmation = "pudding"
 u5.save
 
 u6 = User.new
@@ -53,6 +60,7 @@ u6.name = "Denis"
 u6.gender = "male"
 u6.email = "denis@ga.co"
 u6.password = "pudding"
+u6.password_confirmation = "pudding"
 u6.save
 
 u7 = User.new
@@ -60,6 +68,7 @@ u7.name = "Dean"
 u7.gender = "male"
 u7.email = "dean@ga.co"
 u7.password = "pudding"
+u7.password_confirmation = "pudding"
 u7.save
 
 u8 = User.new
@@ -67,6 +76,7 @@ u8.name = "Magda"
 u8.gender = "female"
 u8.email = "magda@ga.co"
 u8.password = "pudding"
+u8.password_confirmation = "pudding"
 u8.save
 
 u9 = User.new
@@ -74,6 +84,7 @@ u9.name = "Anthony"
 u9.gender = "male"
 u9.email = "anthony@ga.co"
 u9.password = "pudding"
+u9.password_confirmation = "pudding"
 u9.save
 
 u10 = User.new
@@ -81,6 +92,7 @@ u10.name = "Harry"
 u10.gender = "male"
 u10.email = "harry@ga.co"
 u10.password = "pudding"
+u10.password_confirmation = "pudding"
 u10.save
 
 u11 = User.new
@@ -88,6 +100,7 @@ u11.name = "DT"
 u11.gender = "male"
 u11.email = "dt@ga.co"
 u11.password = "pudding"
+u11.password_confirmation = "pudding"
 u11.save
 
 #===========================================================
