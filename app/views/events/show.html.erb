@@ -75,10 +75,12 @@
 <script>
 
 $(document).ready(function() {
+
   if(<%=@flagUser%>){
     $('.join').html('Joined!');
   }
   $('.join').on('click', function(event){
+    console.log('join click')
     var $eventDiv = $(event.target).closest('#list')
     var eventId = "<%=@event.id%>"
     var $joinCount = $eventDiv.find('.userCount')

@@ -55,7 +55,7 @@
   <h2 id="eventAttendingHeader">Events I'm currently attending:</h2>
 <% current_user.events.each do |event| %>
 <div class="userEventsList">
-    <p><%= event.listing %> at <%= event.location %>, <%= event.state %> on the <%= event.date %>. <a class="listingsLinks" href="/events/<%= event.id %>">more details</a></p>
+    <p><%= event.listing %> at <%= event.location %>, <%= event.state %> on <%= event.date %>. <a class="listingsLinks" href="/events/<%= event.id %>">more details</a></p>
 </div>
 <% end %>
 

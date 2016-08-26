@@ -5,7 +5,9 @@ module Api
     def create
       ue_table = Usersevent.all
       flag = joined? current_user.id, params[:event_id], ue_table
-      if !flag
+      @event = Event.find_by(id: params[:event_id])
+
+      if !flag && @event.users.count < @event.attendees.to_i
         @join = Usersevent.new
         @join.user_id = current_user.id
         @join.event_id = params[:event_id]
