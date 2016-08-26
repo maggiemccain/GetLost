@@ -84,7 +84,35 @@ function initMap() {
             }, {
               featureType: 'transit.station',
               stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
-            }],
+            },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" },
+      { "color": "#6F4CFF" }
+    ]
+  },{
+    "featureType": "road.highway",
+    "stylers": [
+      { "visibility": "off" },
+      { "color": "#554E71" },
+      { "weight": 0.1 }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "color": "#7FB27F" },
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#5b2f23" },
+      { "weight": 1.6 }
+    ]
+  }],
           disableDoubleClickZoom: true
   });
 
@@ -101,24 +129,24 @@ function initMap() {
 
 var row_check = 10000000000;
 
-// setInterval(function(){
-//   console.log("row_check"+row_check);
-//   var events;
-//   $.ajax({
-//     type: "GET",
-//     url: "/api/events/recent",
-//     data: {lastCheck: row_check}
-//   }).done(function(response){
-//     console.log(response);
-//     row_check = response.current_count
-//     if(response.event_update !== null){
-//       events = response.event_update.map(function(evt) {
-//         return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
-//       });
-//       loadMarkers(events);
-//     }
-//   });
-// }, 10000);
+setInterval(function(){
+  console.log("row_check"+row_check);
+  var events;
+  $.ajax({
+    type: "GET",
+    url: "/api/events/recent",
+    data: {lastCheck: row_check}
+  }).done(function(response){
+    console.log(response);
+    row_check = response.current_count
+    if(response.event_update !== null){
+      events = response.event_update.map(function(evt) {
+        return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
+      });
+      loadMarkers(events);
+    }
+  });
+}, 3000);
 
 function api_request_events(route, args) {
   // request events from db and plot markers on map
