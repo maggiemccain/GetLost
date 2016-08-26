@@ -101,24 +101,24 @@ function initMap() {
 
 var row_check = 10000000000;
 
-setInterval(function(){
-  console.log("row_check"+row_check);
-  var events;
-  $.ajax({
-    type: "GET",
-    url: "/api/events/recent",
-    data: {lastCheck: row_check}
-  }).done(function(response){
-    console.log(response);
-    row_check = response.current_count
-    if(response.event_update !== null){
-      events = response.event_update.map(function(evt) {
-        return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
-      });
-      loadMarkers(events);
-    }
-  });
-}, 10000);
+// setInterval(function(){
+//   console.log("row_check"+row_check);
+//   var events;
+//   $.ajax({
+//     type: "GET",
+//     url: "/api/events/recent",
+//     data: {lastCheck: row_check}
+//   }).done(function(response){
+//     console.log(response);
+//     row_check = response.current_count
+//     if(response.event_update !== null){
+//       events = response.event_update.map(function(evt) {
+//         return {id: evt.id, listing: evt.listing, sport: evt.sport, icon: evt.hobby_image_url, latLng: {lat: evt.latitude, lng: evt.longitude}}
+//       });
+//       loadMarkers(events);
+//     }
+//   });
+// }, 10000);
 
 function api_request_events(route, args) {
   // request events from db and plot markers on map
@@ -178,19 +178,25 @@ function plotMarker(location) {
 
   marker.addListener('click', function(event) {
     closeInfoWindows(infoWindows);
-    var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, 10)});
-    infoWindow.setContent("<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
-    "&lng=" + event.latLng.toJSON().lng + "'>Create</a>");
+    windowDom = "<button id='expBtn' class='expl'>Show event around</button><a href='/events/new?lat=" + event.latLng.toJSON().lat +
+    "&lng=" + event.latLng.toJSON().lng + "'>Create</a>"
+    var infoWindow = new google.maps.InfoWindow({map: map, pixelOffset: new google.maps.Size(0, -10),
+    });
+
+    infoWindow.setContent(windowDom);
+
+    var updateLoc = event.latLng.toJSON();
     infoWindow.open(map, marker);
-    map.setCenter(event.latLng);
-    infoWindows.push(infoWindow);
-    console.log($("#expBtn"));
-    var stop = false;
-    $("#expBtn").on('click', function(){
+    $("#map").on('click', '#expBtn', function(){
+        console.log('button clicked')
         clearMarkers(eventMarkers);
         api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
 
     });
+
+    map.setCenter(event.latLng);
+    infoWindows.push(infoWindow);
+
 
   });
   markers.shift();
@@ -256,14 +262,14 @@ function addMarkerWithTimeout(position, timeout, draggable, iconUrl, markerType)
      }
      marker.addListener('dragstart', toggleBounce);
      marker.addListener('mouseup', function(event){
-       if (marker.getAnimation() === null) {
+       if (marker.getAnimation() === null && markerType === "user") {
          marker.setAnimation(google.maps.Animation.BOUNCE);
          marker.setIcon('http://imgur.com/sKuevY0.png');
         getLostTo =event.latLng.toJSON();
         console.log(event.latLng.toJSON());
-        clearMarkers(eventMarkers);
-        api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
-         //marker.setIcon("http://imgur.com/sKuevY0.png");
+        //clearMarkers(eventMarkers);
+        //api_request_events("/api/events", {lat: getLostTo.lat, lng: getLostTo.lng, radius: 25});
+         marker.setIcon("http://imgur.com/sKuevY0.png");
        }
 
      });
