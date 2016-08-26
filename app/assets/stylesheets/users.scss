@@ -1,3 +1,57 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.newForm  {
+  width: 50%;
+  margin: 0 auto;
+
+  input {
+    display: block;
+    margin: 1% auto;
+    padding: 2%;
+  }
+
+  .description {
+    // margin: 3%;
+    padding: 2%;
+  }
+
+  select {
+  margin: 10px auto;
+  border: 1px solid #111;
+  background: white;
+  width: 150px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+
+}
+
+.userEditWrap > * {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
+
+.myEventListings {
+  height: 50vh;
+}
+
+.userEditForm input {
+  margin: 3% auto;
+}
+
+.userEditForm > * {
+  margin-bottom: 1%;
+}

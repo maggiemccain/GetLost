@@ -32,6 +32,10 @@ class EventsController < ApplicationController
     @event.description = params[:description]
     @event.date = params[:date]
     if @event.save
+      join = Usersevent.new
+      join.user_id = current_user.id
+      join.event_id = @event.id
+      join.save
       redirect_to '/events'
     else
       render :new

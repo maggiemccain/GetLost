@@ -160,11 +160,10 @@ e.location = 'Yarra Bend Park'
 e.latitude = -37.9938
 e.longitude = 145.31010
 e.state = 'Victoria'
-e.image_url = 'http://www.streamsongresort.com/wp-content/uploads/2014/04/header-bass-fishing.jpg'
 e.attendees = 5
 e.hobby_id = 6
 e.description = 'Looking for fishing enthusiasts to join me on my paddle boat to fish in the Yarra River.  We will plan to meet at Yarra Bend Park entrance bright and early at 5am to get the best fish from this brown river!'
-e.date = '9/1/16'
+e.date = '2016-09-01'
 e.save
 
 e1 = Event.new
@@ -173,9 +172,56 @@ e1.location = 'Yarra Valley'
 e1.latitude = -37.1568984
 e1.longitude = 145.4272401
 e1.state = 'Victoria'
-e1.image_url = 'https://www.google.com.au/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwijt7TGgdnOAhUDl5QKHTmNDm0QjBwIBA&url=http%3A%2F%2Fblog.chapmanchryslerjeep.com%2Ffiles%2F2013%2F02%2FJeep.jpg&bvm=bv.130731782,d.dGo&psig=AFQjCNHlNGJ3R12UsjY0stV29fyqclRdFw&ust=1472092363034186'
 e1.attendees = 3
 e1.hobby_id = 7
 e1.description = 'I love off roading in my new Jeep!  Would love company on an afternoon off roading excursion.  Maybe even a kangaroo siting!  Will send out meet up logistics a week before our adventure.'
-e1.date = '10/1/16'
+e1.date = '2016-10-01'
 e1.save
+
+e2 = Event.new
+e2.listing = 'Large Group Hike'
+e2.location = 'Dandenong Ranges'
+e2.latitude = -37.833333
+e2.longitude = 145.35
+e2.state = 'Victoria'
+e2.attendees = 20
+e2.hobby_id = 1
+e2.description = 'All are welcome on this group hike through the range.  The view cannot be beat!'
+e2.date = '2016-11-15'
+e2.save
+
+e3 = Event.new
+e3.listing = 'Fishing from St Kilda Pier'
+e3.location = 'St Kilda Pier'
+e3.latitude = -37.8646
+e3.longitude = 144.9677
+e3.state = 'Victoria'
+e3.attendees = 6
+e3.hobby_id = 6
+e3.description = 'Fish off the pier in beautiful St Kilda.  Best fishing in the city, and a nice view of the skyline!'
+e3.date = '2016-09-04'
+e3.save
+
+e4 = Event.new
+e4.listing = 'Prahan Bike Ride'
+e4.location = 'Prahan Park'
+e4.latitude = -37.8520
+e4.longitude = 144.9980
+e4.state = 'Victoria'
+e4.attendees = 10
+e4.hobby_id = 7
+e4.description = 'All are welcome to this leisurely bike ride in beautiful Prahan!  No need to be a skilled cyclist, this will not be strenuous.  We will plan to do happy hour post ride.'
+e4.date = '2016-10-16'
+e4.save
+
+e5 = Event.new
+e5.listing = 'Wind Surfing'
+e5.location = 'St Kilda Beach'
+e5.latitude = -37.8679
+e5.longitude = 144.9740
+e5.state = 'Victoria'
+e5.attendees = 4
+e5.hobby_id = 3
+e5.description = 'Looking for fellow seasoned wind surfers for one final outing in St Kilda before it gets cold this winter.  Should be narly mate!'
+e5.date = '2016-09-10'
+e5.save

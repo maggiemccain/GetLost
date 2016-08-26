@@ -43,6 +43,11 @@
   color: white;
 }
 
+.searchBarDiv {
+  vertical-align: middle;
+  text-align: center;
+}
+
 .userDiv {
   text-align: right;
   padding-right: 0.5em;
@@ -53,6 +58,7 @@
 
 #eventSearch {
   display: flex;
+  color: white;
   flex: 1;
   text-align: center;
   padding: 0.1em 0.3em 0.1em 0.3em;
@@ -185,11 +191,11 @@ border: 1px solid #ccc;
   text-align: center;
 }
 
-.deleteBtn {
+/*.deleteBtn {
   margin-top: 5em;
   margin-right: 70em;
   text-align: left;
-}
+}*/
 
 .myEventListings {
   color: white;

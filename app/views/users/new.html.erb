@@ -17,46 +17,42 @@
 <div class="signUpPageBody">
 
   <div class="signUpPageForm">
-    
-    <%= form_tag '/users', method: 'post' do %>
 
-      <label for="">name</label>
-      <input type="text" name="name">
+    <%= form_tag '/users', class: 'newForm',method: 'post' do %>
+
+      <!-- <label for="">name</label> -->
+      <input type="text" name="name" placeholder="name">
       <select name="gender" id="">
-        <option value="">gender</option>
-        <option value="male">male</option>
-        <option value="female">female</option>
+        <option value="">Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
       </select>
 
-      <label for="">email</label>
-      <input type="text" name="email">
+      <input type="text" name="email" placeholder="email">
 
-      <label for="">password</label>
-      <input type="password" name="password">
+      <input type="password" name="password" placeholder="password">
 
-      <label for="">confirm password</label>
-      <input type="password" name="password_confirmation">
+      <input type="password" name="password_confirmation" placeholder="confirm password">
 
-      <button>sign up</button>
+      <button class="btn">sign up</button>
     <% end %>
-    
+
   </div>
 
   <p class="formPageSentence">or, if you already have an account, please login</p>
 
   <div class="formPageLogin">
-    
-         <%= form_tag '/session', method: 'post' do %>
-          <label for="">email</label>
-          <input type="text" name="email">
 
-          <label for="">password</label>
-          <input type="password" name="password">
+         <%= form_tag '/session', class: 'newForm', method: 'post' do %>
 
-        <button>login</button>
+          <input type="text" name="email" placeholder="email">
+
+          <input type="password" name="password" placeholder="email">
+
+        <button class="btn">login</button>
 
       <% end %>
   </div>
 
-  
+
 </div>
